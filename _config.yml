@@ -1,23 +1,36 @@
-# Site wide configuration
-title: Middleware - Felipe Cabargas' Blog
-baseurl: ""
-url: "https://www.middleware.blog"
-favicon: "images/ndd-logo.png"
-g_analytics: UA-5897138-2
+# site settings
+title: cabargas.com
+subtitle: felipe@cabargas $
+email: felipe.cabargas@gmail.com
+description: I'm a 27-year old Software Engineer from 🇨🇱
+baseurl: "" # the subpath of your site, e.g. /blog
+url: # the base hostname & protocol for your site
+author: Felipe Cabargas
+street_address: Somewhere around origin/master
+city: Copenhagen
+state:
+zip_code:
+country: Denmark
+phone: (+569) 7842-8435
 
-# Bio
-header: Middleware
-desc: >
-  Felipe Cabargas' Blog
-# Jekyll configuration
-theme: louie
+# homepage tiles
+tiles-source: pages # accepts "posts" or "pages"
+tiles-count: 6
 
-permalink:   /:year/:month/:title
-date_format: "%m/%d/%Y"
-prev-next: true
+# social settings
+500px_url:
+facebook_url:
+github_url: https://github.com/felipecabargas
+gitlab_url: https://gitlab.com/u/cabargas
+googleplus_url:
+instagram_url: https://instagram.com/juanpintoduran
+linkedin_url: https://www.linkedin.com/in/cabargas
+pinterest_url:
+slack_url:
+twitter_url: https://twitter.com/juanpintoduran
 
-markdown:    kramdown
-highlighter: rouge
+# build settings
+markdown: kramdown
 
-# include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
+sass:
+  style: compressed

@@ -1,17 +1,27 @@
-<div class="bio">
-  <div class="bio__header">
-  	<a href="{{ site.url }}{{ "/" | relative_url }}">
-	  {{ site.header }}
-	</a>
-  </div>
-  <div class="bio__desc">{{ site.desc }}</div>
-  {% if site.data.social %}
-    <p class="bio__social">
-      {% for item in site.data.social %}
-        <span>
-          + <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
-        </span>
-      {% endfor %}
-    </p>
-  {% endif %}
-</div>
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header"{% if page.layout == "landing" %} class="alt style2"{% endif %}{% if page.layout == "home" %} class="alt"{% endif %}>
+	<a href="{{ "" | absolute_url }}/" class="logo"><strong>{{ site.title }}</strong> <span>{{ site.subtitle }}</span></a>
+	<!--
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+	-->
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        {% for page in site.pages %}
+		    {% if page.layout == "home" %}
+		        <li><a href="{{ "" | absolute_url }}/">{{ page.title }}</a></li>
+	    	{% endif %}
+		{% endfor %}
+		<li><a href="https://middleware.blog">Blog</a></li>
+	</ul>
+	<ul class="actions vertical">
+		<li><a href="mailto:felipe.cabargas@gmail.com" class="button fit">Write me</a></li>
+	</ul>
+</nav>
