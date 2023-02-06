@@ -1,0 +1,47 @@
+// Colors
+//
+$theme: #018574;
+$text: #272727;
+$light-grey: #fff;
+$dark-grey: #3B3E48;
+$highlight-grey: #7d828a;
+$midnightblue: #2c3e50;
+$red: red;
+
+// Fonts
+//
+$fonts: 'Roboto Mono', monospace;
+$code-fonts: Consolas, "Andale Mono WT", "Andale Mono", Menlo, Monaco, "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, "YaHei Consolas Hybrid", monospace, "Segoe UI Emoji", "PingFang SC", "Microsoft YaHei";
+
+// Mixins
+//
+@mixin dimmed {
+  opacity: .6;
+}
+
+@mixin aTag {
+  a {
+    word-wrap: break-word;
+    border: none;
+    box-shadow: inset 0 -4px 0 $theme;
+    transition-property: box-shadow;
+    transition-duration: .1s;
+
+    &:hover {
+      color:$red !important;
+      box-shadow: inset 0 -1em 0 $theme;
+    }
+  }
+}
+
+a:hover {
+  color: $red !important;
+}
+
+h1#home-title {
+  border-bottom: 5px solid $red;
+  line-height: 0.8;
+  margin-bottom: 20px;
+}
+
+
