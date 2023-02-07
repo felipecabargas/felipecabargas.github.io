@@ -93,7 +93,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   [[menu.main]]
     name = "Blog"
     url = "/blog"
-    weight = 20
+    weight = 10
 
   [[menu.main]]
     name = "21Damage"
@@ -101,11 +101,17 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
     weight = 20
 
   [[menu.main]]
-    name = "Life in DK"
+    name = "Life in Denmark"
     url = "https://felipe.dk"
     weight = 20
 
   [[menu.main]]
     name = "Slides"
     url = "https://felipe.codes/slides/"
-    weight = 20
+    weight = 15
+
+  [[menu.main]]
+    name = "Current Hardware"
+    url = "/hardware"
+    weight = 30
+

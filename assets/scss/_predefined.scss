@@ -48,8 +48,8 @@ h1#home-title {
 // Media queries
 //
 @media (prefers-color-scheme: dark) {
-  body {
-    background: $background-dark;
+  html, body {
+    background: $background-dark !important;
     color: $text-dark !important;
   }
 
