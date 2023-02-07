@@ -6,7 +6,12 @@ $light-grey: #fff;
 $dark-grey: #3B3E48;
 $highlight-grey: #7d828a;
 $midnightblue: #2c3e50;
-$red: red;
+
+$background-light: white;
+$background-dark: #202124;
+$highlight-light: red;
+$highlight-dark: #50fa7b;
+$text-dark: white;
 
 // Fonts
 //
@@ -28,20 +33,51 @@ $code-fonts: Consolas, "Andale Mono WT", "Andale Mono", Menlo, Monaco, "Lucida C
     transition-duration: .1s;
 
     &:hover {
-      color:$red !important;
+      color:$highlight-light !important;
       box-shadow: inset 0 -1em 0 $theme;
     }
   }
 }
 
-a:hover {
-  color: $red !important;
-}
-
 h1#home-title {
-  border-bottom: 5px solid $red;
   line-height: 0.8;
   margin-bottom: 20px;
 }
+
+// Media queries
+//
+@media (prefers-color-scheme: dark) {
+  body {
+    background: $background-dark;
+    color: $text-dark !important;
+  }
+
+  a{
+    color: $text-dark !important;
+  }
+
+  a:hover {
+    color: $highlight-dark !important;
+  }
+
+  h1#home-title {
+    border-bottom: 5px solid $highlight-dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: $background-light !important;
+  }
+
+  a:hover {
+    color: $highlight-light !important;
+  }
+
+  h1#home-title {
+    border-bottom: 5px solid $highlight-light;
+  }
+}
+
 
 
