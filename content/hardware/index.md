@@ -7,7 +7,7 @@ draft: false
 Not that I think anybody should take this as a reference, but since I'm asked this from time to time, here it goes:
 
 ### Laptop
- - None :( (But getting an M2 Max MacBook Pro this month if you care)
+ - MacBook Pro (14" M2 Max 32GB - 1TB)
 
 ### Tablet
 - iPad Mini 6th Gen (512 GB)
