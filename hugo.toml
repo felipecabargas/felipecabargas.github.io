@@ -1,4 +1,4 @@
-baseURL = 'https://felipe.codes/'
+baseURL = 'https://felipe.dk/'
 title = 'felipe@cabargas'
 theme = 'hermit'
 
@@ -21,7 +21,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 
 [author]
   name = "A. Felipe Cabargas"
-  email = "me@felipe.codes"
+  email = "me@felipe.dk"
 
 [blackfriday]
   # hrefTargetBlank = true
@@ -86,7 +86,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 
   [[params.social]]
     name = "email"
-    url = "me@felipe.codes"
+    url = "me@felipe.dk"
 
 [menu]
 
@@ -107,7 +107,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 
   [[menu.main]]
     name = "Slides"
-    url = "https://felipe.codes/slides/"
+    url = "https://felipe.dk/slides/"
     weight = 15
 
   [[menu.main]]
