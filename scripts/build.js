@@ -107,7 +107,7 @@ ${noteBanner}
 <footer class="site-footer">
   <span>© 2026 Felipe Cabargas</span>
   <div class="social-links">
-    <a href="https://linkedin.com/in/felipecabargas" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://linkedin.com/in/cabargas" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://github.com/felipecabargas" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
