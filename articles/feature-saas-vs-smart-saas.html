@@ -12,6 +12,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="It's 2007 All Over Again: Feature-SaaS vs. Smart-SaaS">
   <meta name="twitter:description" content="AI adoption in SaaS is echoing the shift from feature phones to smartphones. The winners won't be those who ship the most AI features — they'll be the ones who bet on data.">
+  <link rel="alternate" hreflang="en" href="https://cabargas.com/articles/feature-saas-vs-smart-saas">
   <link rel="alternate" type="application/rss+xml" title="Felipe Cabargas" href="/feed.xml">
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -27,6 +28,7 @@
 </nav>
 
 <main class="page">
+  <div class="lang-content" data-lang="en">
   <article class="article">
     <header class="article-header">
       <div class="article-eyebrow">
@@ -42,6 +44,7 @@
         <span class="article-topic-tag">Startups</span>
       </div>
     </header>
+
 
     <div class="article-body">
       <p>When we look back at the smartphone revolution, the failure of the feature phone industry isn&#39;t that they lacked innovation. They were innovating constantly — adding VGA cameras, better keyboards, music players, even internet access.</p>
@@ -69,8 +72,8 @@
 
     <div class="share-label">Share this essay</div>
     <div class="share-links">
-      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcabargas.com%2Farticles%2Ffeature-saas-vs-smart-saas" target="_blank" rel="noopener">Share on LinkedIn</a>
-      <a class="share-btn" href="https://x.com/intent/tweet?url=https%3A%2F%2Fcabargas.com%2Farticles%2Ffeature-saas-vs-smart-saas&text=It's%202007%20All%20Over%20Again%3A%20Feature-SaaS%20vs.%20Smart-SaaS" target="_blank" rel="noopener">Share on X</a>
+      <a class="share-btn share-linkedin" data-title="It's 2007 All Over Again: Feature-SaaS vs. Smart-SaaS" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a class="share-btn share-x" data-title="It's 2007 All Over Again: Feature-SaaS vs. Smart-SaaS" target="_blank" rel="noopener">Share on X</a>
       <a class="share-btn" href="#" onclick="navigator.clipboard.writeText(location.href); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy link',2000); return false;">Copy link</a>
     </div>
 
@@ -90,6 +93,7 @@
       <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
     </div>
   </article>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -100,6 +104,40 @@
     <a href="/feed.xml">RSS</a>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var hasEs = false;
+    function detect() {
+      var param = new URLSearchParams(location.search).get('lang');
+      if (param === 'en' || param === 'es') return hasEs ? param : 'en';
+      if (hasEs && (navigator.language || '').toLowerCase().startsWith('es')) return 'es';
+      return 'en';
+    }
+    function apply(lang) {
+      document.querySelectorAll('.lang-content').forEach(function (el) {
+        el.hidden = el.dataset.lang !== lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      var url = new URL(location.href);
+      lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+      var encoded = encodeURIComponent(location.href);
+      document.querySelectorAll('.share-linkedin').forEach(function (el) {
+        el.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encoded;
+      });
+      document.querySelectorAll('.share-x').forEach(function (el) {
+        el.href = 'https://x.com/intent/tweet?url=' + encoded + '&text=' + encodeURIComponent(el.dataset.title || '');
+      });
+    }
+    apply(detect());
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { apply(btn.dataset.lang); });
+    });
+  })();
+</script>
 
 </body>
 </html>

@@ -12,6 +12,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="The Hate on Vibe-Coding, and Why It's an Overreaction">
   <meta name="twitter:description" content="AI-driven 'vibe-coding' isn't the threat people think it is — and the outrage reveals more about the industry's anxieties than any real technical risk.">
+  <link rel="alternate" hreflang="en" href="https://cabargas.com/articles/the-hate-on-vibe-coding">
   <link rel="alternate" type="application/rss+xml" title="Felipe Cabargas" href="/feed.xml">
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -27,6 +28,7 @@
 </nav>
 
 <main class="page">
+  <div class="lang-content" data-lang="en">
   <article class="article">
     <header class="article-header">
       <div class="article-eyebrow">
@@ -43,6 +45,7 @@
         <span class="article-topic-tag">Product</span>
       </div>
     </header>
+
 
     <div class="article-body">
       <blockquote>
@@ -81,8 +84,8 @@
 
     <div class="share-label">Share this essay</div>
     <div class="share-links">
-      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcabargas.com%2Farticles%2Fthe-hate-on-vibe-coding" target="_blank" rel="noopener">Share on LinkedIn</a>
-      <a class="share-btn" href="https://x.com/intent/tweet?url=https%3A%2F%2Fcabargas.com%2Farticles%2Fthe-hate-on-vibe-coding&text=The%20Hate%20on%20Vibe-Coding%2C%20and%20Why%20It's%20an%20Overreaction" target="_blank" rel="noopener">Share on X</a>
+      <a class="share-btn share-linkedin" data-title="The Hate on Vibe-Coding, and Why It's an Overreaction" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a class="share-btn share-x" data-title="The Hate on Vibe-Coding, and Why It's an Overreaction" target="_blank" rel="noopener">Share on X</a>
       <a class="share-btn" href="#" onclick="navigator.clipboard.writeText(location.href); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy link',2000); return false;">Copy link</a>
     </div>
 
@@ -102,6 +105,7 @@
       <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
     </div>
   </article>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -112,6 +116,40 @@
     <a href="/feed.xml">RSS</a>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var hasEs = false;
+    function detect() {
+      var param = new URLSearchParams(location.search).get('lang');
+      if (param === 'en' || param === 'es') return hasEs ? param : 'en';
+      if (hasEs && (navigator.language || '').toLowerCase().startsWith('es')) return 'es';
+      return 'en';
+    }
+    function apply(lang) {
+      document.querySelectorAll('.lang-content').forEach(function (el) {
+        el.hidden = el.dataset.lang !== lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      var url = new URL(location.href);
+      lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+      var encoded = encodeURIComponent(location.href);
+      document.querySelectorAll('.share-linkedin').forEach(function (el) {
+        el.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encoded;
+      });
+      document.querySelectorAll('.share-x').forEach(function (el) {
+        el.href = 'https://x.com/intent/tweet?url=' + encoded + '&text=' + encodeURIComponent(el.dataset.title || '');
+      });
+    }
+    apply(detect());
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { apply(btn.dataset.lang); });
+    });
+  })();
+</script>
 
 </body>
 </html>

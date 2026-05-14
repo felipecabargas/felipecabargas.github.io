@@ -12,6 +12,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Chile's Privacy Law Deadline Is Closer Than You Think — And Your Legal Team Can't Fix This Alone">
   <meta name="twitter:description" content="Ley Nº 21.719 becomes fully enforceable on December 1, 2026. Most organizations doing business in Chile are delegating this to their legal departments — the same mistake European companies made before GDPR hit.">
+  <link rel="alternate" hreflang="en" href="https://cabargas.com/articles/chile-data-privacy-law-2026">
   <link rel="alternate" type="application/rss+xml" title="Felipe Cabargas" href="/feed.xml">
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -27,6 +28,7 @@
 </nav>
 
 <main class="page">
+  <div class="lang-content" data-lang="en">
   <article class="article">
     <header class="article-header">
       <div class="article-eyebrow">
@@ -43,6 +45,7 @@
         <span class="article-topic-tag">Chile</span>
       </div>
     </header>
+
 
     <div class="article-body">
       <p>Ley Nº 21.719 — Chile&#39;s new personal data protection law — becomes fully enforceable on December 1, 2026. That&#39;s less than ten months away. And worryingly, most organizations are treating this as a legal problem.</p>
@@ -69,8 +72,8 @@
 
     <div class="share-label">Share this essay</div>
     <div class="share-links">
-      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcabargas.com%2Farticles%2Fchile-data-privacy-law-2026" target="_blank" rel="noopener">Share on LinkedIn</a>
-      <a class="share-btn" href="https://x.com/intent/tweet?url=https%3A%2F%2Fcabargas.com%2Farticles%2Fchile-data-privacy-law-2026&text=Chile's%20Privacy%20Law%20Deadline%20Is%20Closer%20Than%20You%20Think%20%E2%80%94%20And%20Your%20Legal%20Team%20Can't%20Fix%20This%20Alone" target="_blank" rel="noopener">Share on X</a>
+      <a class="share-btn share-linkedin" data-title="Chile's Privacy Law Deadline Is Closer Than You Think — And Your Legal Team Can't Fix This Alone" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a class="share-btn share-x" data-title="Chile's Privacy Law Deadline Is Closer Than You Think — And Your Legal Team Can't Fix This Alone" target="_blank" rel="noopener">Share on X</a>
       <a class="share-btn" href="#" onclick="navigator.clipboard.writeText(location.href); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy link',2000); return false;">Copy link</a>
     </div>
 
@@ -90,6 +93,7 @@
       <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
     </div>
   </article>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -100,6 +104,40 @@
     <a href="/feed.xml">RSS</a>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var hasEs = false;
+    function detect() {
+      var param = new URLSearchParams(location.search).get('lang');
+      if (param === 'en' || param === 'es') return hasEs ? param : 'en';
+      if (hasEs && (navigator.language || '').toLowerCase().startsWith('es')) return 'es';
+      return 'en';
+    }
+    function apply(lang) {
+      document.querySelectorAll('.lang-content').forEach(function (el) {
+        el.hidden = el.dataset.lang !== lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      var url = new URL(location.href);
+      lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+      var encoded = encodeURIComponent(location.href);
+      document.querySelectorAll('.share-linkedin').forEach(function (el) {
+        el.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encoded;
+      });
+      document.querySelectorAll('.share-x').forEach(function (el) {
+        el.href = 'https://x.com/intent/tweet?url=' + encoded + '&text=' + encodeURIComponent(el.dataset.title || '');
+      });
+    }
+    apply(detect());
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { apply(btn.dataset.lang); });
+    });
+  })();
+</script>
 
 </body>
 </html>
