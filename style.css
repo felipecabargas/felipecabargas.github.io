@@ -153,6 +153,7 @@ body {
 }
 .article-title:hover { color: #003d73; }
 .article-excerpt { font-size: 12px; color: #888; line-height: 1.5; }
+.index-note { font-size: 11px; color: #bbb; margin-top: 16px; }
 .article-tags { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
 .article-tag {
   font-size: 10px;
