@@ -13,32 +13,40 @@
 <nav class="site-nav">
   <a class="site-name" href="/">Felipe Cabargas</a>
   <div class="nav-links">
-    <a href="/" class="nav-active">Writing</a>
-    <a href="/projects">Projects</a>
-    <a href="/about">About</a>
+    <a href="/" class="nav-active"><span data-lang="en">Writing</span><span data-lang="es" hidden>Escritura</span></a>
+    <a href="/projects"><span data-lang="en">Projects</span><span data-lang="es" hidden>Proyectos</span></a>
+    <a href="/about"><span data-lang="en">About</span><span data-lang="es" hidden>Sobre mí</span></a>
     <a class="consulting-link" href="https://cabargas.consulting" target="_blank" rel="noopener">Consulting ↗</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en">English</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="es">Español</button>
+    </div>
   </div>
 </nav>
 
 <main class="page">
-  <p class="tagline">Thinking out loud on product, AI, and what it means to build responsibly.</p>
+  <p class="tagline">
+    <span data-lang="en">Thinking out loud on product, AI, and what it means to build responsibly.</span>
+    <span data-lang="es" hidden>Pensando en voz alta sobre producto, IA y qué significa construir de manera responsable.</span>
+  </p>
 
   <div class="filter-tabs" role="tablist">
-    <button class="tab active" role="tab" aria-selected="true" onclick="filterArticles('all', this)">All</button>
+    <button class="tab active" role="tab" aria-selected="true" onclick="filterArticles('all', this)"><span data-lang="en">All</span><span data-lang="es" hidden>Todo</span></button>
     <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('ai', this)">AI</button>
-    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('product', this)">Product</button>
-    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('governance', this)">Governance</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('product', this)"><span data-lang="en">Product</span><span data-lang="es" hidden>Producto</span></button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('governance', this)"><span data-lang="en">Governance</span><span data-lang="es" hidden>Gobernanza</span></button>
     <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('startups', this)">Startups</button>
-    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('policy', this)">Policy</button>
-    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('engineering', this)">Engineering</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('policy', this)"><span data-lang="en">Policy</span><span data-lang="es" hidden>Política</span></button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('engineering', this)"><span data-lang="en">Engineering</span><span data-lang="es" hidden>Ingeniería</span></button>
   </div>
 
   <div class="article-list">
     <!-- ARTICLES START -->
     <div class="article-item" data-topics="ai governance startups">
       <div class="article-left">
-        <a class="article-title" href="/articles/efficiency-paradox">The Efficiency Paradox: Burnout in the Agentic Era</a>
-        <div class="article-excerpt">AI agents promise infinite productivity — but constant supervision, hallucination debugging, and non-deterministic output may be creating a new kind of burnout faster than any manual process did before.</div>
+        <a class="article-title" href="/articles/efficiency-paradox"><span data-lang="en">The Efficiency Paradox: Burnout in the Agentic Era</span><span data-lang="es" hidden>La Paradoja de la Eficiencia: el Burnout en la Era Agéntica</span></a> <span class="lang-badge">ES</span>
+        <div class="article-excerpt"><span data-lang="en">AI agents promise infinite productivity — but constant supervision, hallucination debugging, and non-deterministic output may be creating a new kind of burnout faster than any manual process did before.</span><span data-lang="es" hidden>Los agentes de IA prometen productividad infinita — pero la supervisión constante, la depuración de alucinaciones y los resultados no deterministas pueden estar generando un nuevo tipo de burnout más rápido que cualquier proceso manual anterior.</span></div>
         <div class="article-tags">
           <span class="article-tag">AI</span>
           <span class="article-tag">Governance</span>
@@ -46,15 +54,15 @@
         </div>
       </div>
       <div class="article-meta">
-        <span class="article-type type-essay">Essay</span>
-        <span class="article-date">May 14, 2026</span>
+        <span class="article-type type-essay"><span data-lang="en">Essay</span><span data-lang="es" hidden>Ensayo</span></span>
+        <span class="article-date"><span data-lang="en">May 14, 2026</span><span data-lang="es" hidden>14 de mayo de 2026</span></span>
       </div>
     </div>
 
     <div class="article-item" data-topics="governance policy ai">
       <div class="article-left">
-        <a class="article-title" href="/articles/chile-data-privacy-law-2026">Chile's Privacy Law Deadline Is Closer Than You Think — And Your Legal Team Can't Fix This Alone</a>
-        <div class="article-excerpt">Ley Nº 21.719 becomes fully enforceable on December 1, 2026. Most organizations doing business in Chile are delegating this to their legal departments — the same mistake European companies made before GDPR hit.</div>
+        <a class="article-title" href="/articles/chile-data-privacy-law-2026"><span data-lang="en">Chile's Privacy Law Deadline Is Closer Than You Think — And Your Legal Team Can't Fix This Alone</span><span data-lang="es" hidden>La Ley de Privacidad en Chile: el Plazo Está Más Cerca de lo que Crees — Y Tu Equipo Legal No Puede Resolverlo Solo</span></a> <span class="lang-badge">ES</span>
+        <div class="article-excerpt"><span data-lang="en">Ley Nº 21.719 becomes fully enforceable on December 1, 2026. Most organizations doing business in Chile are delegating this to their legal departments — the same mistake European companies made before GDPR hit.</span><span data-lang="es" hidden>La Ley Nº 21.719 entra en plena vigencia el 1 de diciembre de 2026. La mayoría de las organizaciones están delegando el cumplimiento en sus departamentos legales — el mismo error que cometieron las empresas europeas antes del GDPR.</span></div>
         <div class="article-tags">
           <span class="article-tag">Governance</span>
           <span class="article-tag">Policy</span>
@@ -63,15 +71,15 @@
         </div>
       </div>
       <div class="article-meta">
-        <span class="article-type type-essay">Essay</span>
-        <span class="article-date">May 1, 2026</span>
+        <span class="article-type type-essay"><span data-lang="en">Essay</span><span data-lang="es" hidden>Ensayo</span></span>
+        <span class="article-date"><span data-lang="en">May 1, 2026</span><span data-lang="es" hidden>1 de mayo de 2026</span></span>
       </div>
     </div>
 
     <div class="article-item" data-topics="ai product governance">
       <div class="article-left">
-        <a class="article-title" href="/articles/product-teams-losing-the-ai-race">Product Teams Are Losing the AI Race — And It's Not About Budget</a>
-        <div class="article-excerpt">The gap isn't budget or leadership buy-in. It's a technical understanding gap that's quietly becoming an abyss — and most product teams don't see it coming.</div>
+        <a class="article-title" href="/articles/product-teams-losing-the-ai-race"><span data-lang="en">Product Teams Are Losing the AI Race — And It's Not About Budget</span><span data-lang="es" hidden>Los Equipos de Producto Están Perdiendo la Carrera de la IA — Y No Es una Cuestión de Presupuesto</span></a> <span class="lang-badge">ES</span>
+        <div class="article-excerpt"><span data-lang="en">The gap isn't budget or leadership buy-in. It's a technical understanding gap that's quietly becoming an abyss — and most product teams don't see it coming.</span><span data-lang="es" hidden>La brecha no es de presupuesto ni de apoyo directivo. Es una brecha de comprensión técnica que se está convirtiendo silenciosamente en un abismo — y la mayoría de los equipos de producto no lo ven venir.</span></div>
         <div class="article-tags">
           <span class="article-tag">AI</span>
           <span class="article-tag">Product Management</span>
@@ -80,15 +88,15 @@
         </div>
       </div>
       <div class="article-meta">
-        <span class="article-type type-essay">Essay</span>
-        <span class="article-date">April 15, 2026</span>
+        <span class="article-type type-essay"><span data-lang="en">Essay</span><span data-lang="es" hidden>Ensayo</span></span>
+        <span class="article-date"><span data-lang="en">April 15, 2026</span><span data-lang="es" hidden>15 de abril de 2026</span></span>
       </div>
     </div>
 
     <div class="article-item" data-topics="ai product startups">
       <div class="article-left">
-        <a class="article-title" href="/articles/feature-saas-vs-smart-saas">It's 2007 All Over Again: Feature-SaaS vs. Smart-SaaS</a>
-        <div class="article-excerpt">AI adoption in SaaS is echoing the shift from feature phones to smartphones. The winners won't be those who ship the most AI features — they'll be the ones who bet on data.</div>
+        <a class="article-title" href="/articles/feature-saas-vs-smart-saas"><span data-lang="en">It's 2007 All Over Again: Feature-SaaS vs. Smart-SaaS</span><span data-lang="es" hidden>Estamos en 2007 Otra Vez: Feature-SaaS vs. Smart-SaaS</span></a> <span class="lang-badge">ES</span>
+        <div class="article-excerpt"><span data-lang="en">AI adoption in SaaS is echoing the shift from feature phones to smartphones. The winners won't be those who ship the most AI features — they'll be the ones who bet on data.</span><span data-lang="es" hidden>La adopción de IA en SaaS está repitiendo el cambio de los feature phones a los smartphones. Los ganadores no serán quienes lancen más funcionalidades de IA — sino quienes apuesten por los datos.</span></div>
         <div class="article-tags">
           <span class="article-tag">AI</span>
           <span class="article-tag">Product Strategy</span>
@@ -96,15 +104,15 @@
         </div>
       </div>
       <div class="article-meta">
-        <span class="article-type type-essay">Essay</span>
-        <span class="article-date">September 11, 2025</span>
+        <span class="article-type type-essay"><span data-lang="en">Essay</span><span data-lang="es" hidden>Ensayo</span></span>
+        <span class="article-date"><span data-lang="en">September 11, 2025</span><span data-lang="es" hidden>11 de septiembre de 2025</span></span>
       </div>
     </div>
 
     <div class="article-item" data-topics="ai product governance">
       <div class="article-left">
-        <a class="article-title" href="/articles/the-hate-on-vibe-coding">The Hate on Vibe-Coding, and Why It's an Overreaction</a>
-        <div class="article-excerpt">AI-driven 'vibe-coding' isn't the threat people think it is — and the outrage reveals more about the industry's anxieties than any real technical risk.</div>
+        <a class="article-title" href="/articles/the-hate-on-vibe-coding"><span data-lang="en">The Hate on Vibe-Coding, and Why It's an Overreaction</span><span data-lang="es" hidden>El Odio al Vibe-Coding, y Por Qué Es una Reacción Exagerada</span></a> <span class="lang-badge">ES</span>
+        <div class="article-excerpt"><span data-lang="en">AI-driven 'vibe-coding' isn't the threat people think it is — and the outrage reveals more about the industry's anxieties than any real technical risk.</span><span data-lang="es" hidden>El 'vibe-coding' impulsado por IA no es la amenaza que la gente cree — y la indignación revela más sobre las ansiedades de la industria que sobre cualquier riesgo técnico real.</span></div>
         <div class="article-tags">
           <span class="article-tag">AI</span>
           <span class="article-tag">Engineering</span>
@@ -113,22 +121,32 @@
         </div>
       </div>
       <div class="article-meta">
-        <span class="article-type type-essay">Essay</span>
-        <span class="article-date">September 3, 2025</span>
+        <span class="article-type type-essay"><span data-lang="en">Essay</span><span data-lang="es" hidden>Ensayo</span></span>
+        <span class="article-date"><span data-lang="en">September 3, 2025</span><span data-lang="es" hidden>3 de septiembre de 2025</span></span>
       </div>
     </div>
 
     <!-- ARTICLES END -->
   </div>
 
-  <p class="index-note">Essay excerpts are AI-assisted summaries. All essays are written by me.</p>
+  <p class="index-note">
+    <span data-lang="en">Essay excerpts are AI-assisted summaries. All essays are written by me.</span>
+    <span data-lang="es" hidden>Los resúmenes de los ensayos son generados con IA. Todos los ensayos están escritos por mí.</span>
+  </p>
 
   <div class="consulting-cta">
     <div class="cta-text">
-      <strong>Need a strategy, not just an opinion?</strong>
-      I work with startups on product, AI readiness, and governance.
+      <strong>
+        <span data-lang="en">Need a strategy, not just an opinion?</span>
+        <span data-lang="es" hidden>¿Necesitas estrategia, no solo opiniones?</span>
+      </strong>
+      <span data-lang="en">I work with startups on product, AI readiness, and governance.</span>
+      <span data-lang="es" hidden>Trabajo con startups en producto, preparación para IA y gobernanza.</span>
     </div>
-    <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
+    <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">
+      <span data-lang="en">Work with me ↗</span>
+      <span data-lang="es" hidden>Trabaja conmigo ↗</span>
+    </a>
   </div>
 </main>
 
@@ -154,6 +172,31 @@
       item.classList.toggle('hidden', topic !== 'all' && !topics.includes(topic));
     });
   }
+
+  (function () {
+    function detect() {
+      var param = new URLSearchParams(location.search).get('lang');
+      if (param === 'en' || param === 'es') return param;
+      if ((navigator.language || '').toLowerCase().startsWith('es')) return 'es';
+      return 'en';
+    }
+    function apply(lang) {
+      document.querySelectorAll('[data-lang]').forEach(function (el) {
+        el.hidden = el.dataset.lang !== lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      var url = new URL(location.href);
+      lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+      document.documentElement.lang = lang;
+    }
+    apply(detect());
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { apply(btn.dataset.lang); });
+    });
+  })();
 </script>
 
 </body>

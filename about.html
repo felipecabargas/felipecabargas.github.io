@@ -13,48 +13,94 @@
 <nav class="site-nav">
   <a class="site-name" href="/">Felipe Cabargas</a>
   <div class="nav-links">
-    <a href="/">Writing</a>
-    <a href="/projects">Projects</a>
-    <a href="/about" class="nav-active">About</a>
+    <a href="/"><span data-lang="en">Writing</span><span data-lang="es" hidden>Escritura</span></a>
+    <a href="/projects"><span data-lang="en">Projects</span><span data-lang="es" hidden>Proyectos</span></a>
+    <a href="/about" class="nav-active"><span data-lang="en">About</span><span data-lang="es" hidden>Sobre mí</span></a>
     <a class="consulting-link" href="https://cabargas.consulting" target="_blank" rel="noopener">Consulting ↗</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en">English</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="es">Español</button>
+    </div>
   </div>
 </nav>
 
 <main class="page">
-  <div class="intro">
-    <div class="avatar" aria-hidden="true">FC</div>
-    <div class="intro-text">
-      <div class="intro-name">Felipe Cabargas</div>
-      <div class="intro-role">Product · AI · Governance · Santiago &amp; Copenhagen</div>
-      <div class="intro-bio">I'm a product professional who writes about building things responsibly — from startup foundations to enterprise-scale platforms serving millions.</div>
+
+  <div data-lang="en">
+    <div class="intro">
+      <div class="avatar" aria-hidden="true">FC</div>
+      <div class="intro-text">
+        <div class="intro-name">Felipe Cabargas</div>
+        <div class="intro-role">Product · AI · Governance · Santiago &amp; Copenhagen</div>
+        <div class="intro-bio">I'm a product professional who writes about building things responsibly — from startup foundations to enterprise-scale platforms serving millions.</div>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <div class="section-title">A bit more</div>
+      <div class="bio-text">
+        <p>I've spent my career building and scaling digital products — most recently at the enterprise level, where "launch fast" gives way to "serve reliably at scale." I know what it takes to grow a product from early traction to the kind of infrastructure that handles complex, high-stakes markets: the technical debt you have to pay, the governance you can't skip, and the organizational work that no roadmap captures.</p>
+        <p>My background spans Chile and Denmark — two markets with very different risk appetites, regulatory environments, and definitions of done. That cross-market experience shapes how I think about AI adoption, compliance, and the kind of product strategy that holds up when the stakes get real and the user base gets large.</p>
+        <p>This site is where I think out loud. Some pieces are long essays working through a thorny problem. Others are short notes — quick takes on something I've observed. The common thread is a belief that the best builders are also clear thinkers. If something sparks a question or you disagree with me, I'd love to hear from you. And if you need more than an opinion — <a href="https://cabargas.consulting" target="_blank" rel="noopener">I consult too</a>.</p>
+      </div>
+    </div>
+
+    <div class="connect-section">
+      <div class="section-title">Find me elsewhere</div>
+      <div class="connect-links">
+        <a class="connect-btn" href="https://linkedin.com/in/cabargas" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="connect-btn" href="https://github.com/felipecabargas" target="_blank" rel="noopener">GitHub</a>
+        <a class="connect-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">cabargas.consulting ↗</a>
+      </div>
+    </div>
+
+    <div class="consulting-cta">
+      <div class="cta-text">
+        <strong>Need a strategy, not just an opinion?</strong>
+        I work with startups on product, AI readiness, and governance.
+      </div>
+      <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
     </div>
   </div>
 
-  <div class="bio-section">
-    <div class="section-title">A bit more</div>
-    <div class="bio-text">
-      <p>I've spent my career building and scaling digital products — most recently at the enterprise level, where "launch fast" gives way to "serve reliably at scale." I know what it takes to grow a product from early traction to the kind of infrastructure that handles complex, high-stakes markets: the technical debt you have to pay, the governance you can't skip, and the organizational work that no roadmap captures.</p>
-      <p>My background spans Chile and Denmark — two markets with very different risk appetites, regulatory environments, and definitions of done. That cross-market experience shapes how I think about AI adoption, compliance, and the kind of product strategy that holds up when the stakes get real and the user base gets large.</p>
-      <p>This site is where I think out loud. Some pieces are long essays working through a thorny problem. Others are short notes — quick takes on something I've observed. The common thread is a belief that the best builders are also clear thinkers. If something sparks a question or you disagree with me, I'd love to hear from you. And if you need more than an opinion — <a href="https://cabargas.consulting" target="_blank" rel="noopener">I consult too</a>.</p>
+  <div data-lang="es" hidden>
+    <div class="intro">
+      <div class="avatar" aria-hidden="true">FC</div>
+      <div class="intro-text">
+        <div class="intro-name">Felipe Cabargas</div>
+        <div class="intro-role">Producto · IA · Gobernanza · Santiago y Copenhague</div>
+        <div class="intro-bio">Soy un profesional de producto que escribe sobre cómo construir de manera responsable — desde los cimientos de una startup hasta plataformas de escala empresarial que sirven a millones.</div>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <div class="section-title">Un poco más</div>
+      <div class="bio-text">
+        <p>He pasado mi carrera construyendo y escalando productos digitales — más recientemente a nivel empresarial, donde "lanzar rápido" da paso a "servir de manera confiable a escala". Sé lo que se necesita para hacer crecer un producto desde las primeras tracción hasta la infraestructura que maneja mercados complejos y de alto impacto: la deuda técnica que hay que pagar, la gobernanza que no se puede saltar y el trabajo organizacional que ningún roadmap captura.</p>
+        <p>Mi experiencia abarca Chile y Dinamarca — dos mercados con apetitos de riesgo, entornos regulatorios y definiciones de "listo" muy diferentes. Esa experiencia entre mercados define cómo pienso sobre la adopción de IA, el cumplimiento normativo y el tipo de estrategia de producto que se sostiene cuando los stakes son reales y la base de usuarios crece.</p>
+        <p>Este sitio es donde pienso en voz alta. Algunos artículos son ensayos largos que trabajan un problema complejo. Otros son notas breves — reflexiones rápidas sobre algo que he observado. El hilo conductor es la convicción de que los mejores constructores también son pensadores claros. Si algo genera una pregunta o no estás de acuerdo conmigo, me encantaría saberlo. Y si necesitas más que una opinión — <a href="https://cabargas.consulting" target="_blank" rel="noopener">también hago consultoría</a>.</p>
+      </div>
+    </div>
+
+    <div class="connect-section">
+      <div class="section-title">Encuéntrame en</div>
+      <div class="connect-links">
+        <a class="connect-btn" href="https://linkedin.com/in/cabargas" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="connect-btn" href="https://github.com/felipecabargas" target="_blank" rel="noopener">GitHub</a>
+        <a class="connect-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">cabargas.consulting ↗</a>
+      </div>
+    </div>
+
+    <div class="consulting-cta">
+      <div class="cta-text">
+        <strong>¿Necesitas estrategia, no solo opiniones?</strong>
+        Trabajo con startups en producto, preparación para IA y gobernanza.
+      </div>
+      <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Trabaja conmigo ↗</a>
     </div>
   </div>
 
-  <div class="connect-section">
-    <div class="section-title">Find me elsewhere</div>
-    <div class="connect-links">
-      <a class="connect-btn" href="https://linkedin.com/in/cabargas" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="connect-btn" href="https://github.com/felipecabargas" target="_blank" rel="noopener">GitHub</a>
-      <a class="connect-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">cabargas.consulting ↗</a>
-    </div>
-  </div>
-
-  <div class="consulting-cta">
-    <div class="cta-text">
-      <strong>Need a strategy, not just an opinion?</strong>
-      I work with startups on product, AI readiness, and governance.
-    </div>
-    <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
-  </div>
 </main>
 
 <footer class="site-footer">
@@ -65,6 +111,33 @@
     <a href="/feed.xml">RSS</a>
   </div>
 </footer>
+
+<script>
+  (function () {
+    function detect() {
+      var param = new URLSearchParams(location.search).get('lang');
+      if (param === 'en' || param === 'es') return param;
+      if ((navigator.language || '').toLowerCase().startsWith('es')) return 'es';
+      return 'en';
+    }
+    function apply(lang) {
+      document.querySelectorAll('[data-lang]').forEach(function (el) {
+        el.hidden = el.dataset.lang !== lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      var url = new URL(location.href);
+      lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+      document.documentElement.lang = lang;
+    }
+    apply(detect());
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { apply(btn.dataset.lang); });
+    });
+  })();
+</script>
 
 </body>
 </html>

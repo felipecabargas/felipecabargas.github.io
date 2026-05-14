@@ -8,6 +8,7 @@ tags: [AI, Product Management, Governance, Engineering]
 excerpt: "The gap isn't budget or leadership buy-in. It's a technical understanding gap that's quietly becoming an abyss — and most product teams don't see it coming."
 readtime: "4 min read"
 slug: product-teams-losing-the-ai-race
+originalLang: es
 ---
 
 Product teams are losing the race against AI. Not because of budget constraints or lack of leadership buy-in — but because of a technical understanding gap that is quietly becoming an abyss.

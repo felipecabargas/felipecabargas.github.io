@@ -254,33 +254,50 @@ ${items}
   console.log('Generated feed.xml');
 }
 
-function buildArticleItem(frontmatter, hasEs) {
-  const { title, type, topics = [], tags = [], slug } = frontmatter;
-  const date = frontmatter.date;
+function buildArticleItem(frontmatter, hasEs, esFrontmatter) {
+  const { title, type, topics = [], tags = [], slug, date, excerpt } = frontmatter;
   const typeClass = type === 'note' ? 'type-note' : 'type-essay';
   const typeLabel = type === 'note' ? 'Note' : 'Essay';
+  const typeLabelEs = type === 'note' ? 'Nota' : 'Ensayo';
   const topicsAttr = topics.join(' ');
   const tagPills = tags.map(t => `          <span class="article-tag">${escapeAttr(t)}</span>`).join('\n');
   const esBadge = hasEs ? ' <span class="lang-badge">ES</span>' : '';
 
+  const esTitle = esFrontmatter ? esFrontmatter.title : title;
+  const esExcerpt = esFrontmatter ? esFrontmatter.excerpt : excerpt;
+  const esDate = esFrontmatter ? esFrontmatter.date : date;
+
+  const titleHtml = hasEs
+    ? `<span data-lang="en">${escapeAttr(title)}</span><span data-lang="es" hidden>${escapeAttr(esTitle)}</span>`
+    : escapeAttr(title);
+  const excerptHtml = hasEs
+    ? `<span data-lang="en">${escapeAttr(excerpt)}</span><span data-lang="es" hidden>${escapeAttr(esExcerpt)}</span>`
+    : escapeAttr(excerpt);
+  const dateHtml = hasEs
+    ? `<span data-lang="en">${escapeAttr(date)}</span><span data-lang="es" hidden>${escapeAttr(esDate)}</span>`
+    : escapeAttr(date);
+  const typeLabelHtml = hasEs
+    ? `<span data-lang="en">${typeLabel}</span><span data-lang="es" hidden>${typeLabelEs}</span>`
+    : typeLabel;
+
   return `    <div class="article-item" data-topics="${escapeAttr(topicsAttr)}">
       <div class="article-left">
-        <a class="article-title" href="/articles/${slug}">${escapeAttr(title)}</a>${esBadge}
-        <div class="article-excerpt">${escapeAttr(frontmatter.excerpt)}</div>
+        <a class="article-title" href="/articles/${slug}">${titleHtml}</a>${esBadge}
+        <div class="article-excerpt">${excerptHtml}</div>
         <div class="article-tags">
 ${tagPills}
         </div>
       </div>
       <div class="article-meta">
-        <span class="article-type ${typeClass}">${typeLabel}</span>
-        <span class="article-date">${escapeAttr(date)}</span>
+        <span class="article-type ${typeClass}">${typeLabelHtml}</span>
+        <span class="article-date">${dateHtml}</span>
       </div>
     </div>`;
 }
 
 function updateIndex(articles) {
   let html = fs.readFileSync(INDEX_HTML, 'utf8');
-  const items = articles.map(a => buildArticleItem(a.frontmatter, a.hasEs)).join('\n\n');
+  const items = articles.map(a => buildArticleItem(a.frontmatter, a.hasEs, a.esFrontmatter)).join('\n\n');
   const replacement = `<!-- ARTICLES START -->\n${items}\n\n    <!-- ARTICLES END -->`;
   html = html.replace(/<!-- ARTICLES START -->[\s\S]*?<!-- ARTICLES END -->/, replacement);
   fs.writeFileSync(INDEX_HTML, html);
@@ -336,7 +353,7 @@ function main() {
     fs.writeFileSync(outFile, pageHTML);
     console.log(`Built: articles/${slug}.html`);
 
-    articles.push({ frontmatter: en.frontmatter, hasEs: !!es });
+    articles.push({ frontmatter: en.frontmatter, hasEs: !!es, esFrontmatter: es ? es.frontmatter : null });
   }
 
   // Fix 3: sort by sortDate (ISO YYYY-MM) with graceful fallback

@@ -13,67 +13,132 @@
 <nav class="site-nav">
   <a class="site-name" href="/">Felipe Cabargas</a>
   <div class="nav-links">
-    <a href="/">Writing</a>
-    <a href="/projects" class="nav-active">Projects</a>
-    <a href="/about">About</a>
+    <a href="/"><span data-lang="en">Writing</span><span data-lang="es" hidden>Escritura</span></a>
+    <a href="/projects" class="nav-active"><span data-lang="en">Projects</span><span data-lang="es" hidden>Proyectos</span></a>
+    <a href="/about"><span data-lang="en">About</span><span data-lang="es" hidden>Sobre mí</span></a>
     <a class="consulting-link" href="https://cabargas.consulting" target="_blank" rel="noopener">Consulting ↗</a>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en">English</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="es">Español</button>
+    </div>
   </div>
 </nav>
 
 <main class="page">
-  <div class="page-header">
-    <h1 class="page-title">Projects</h1>
-    <p class="page-desc">Things I've built — tools, experiments, and open-source work at the intersection of product and AI.</p>
+
+  <div data-lang="en">
+    <div class="page-header">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-desc">Things I've built — tools, experiments, and open-source work at the intersection of product and AI.</p>
+    </div>
+
+    <div class="project-list">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">Gambit</div>
+          <span class="project-status">Active</span>
+        </div>
+        <p class="project-desc">A collection of PM skills and workflow agents for Claude and Gemini — covering the full product lifecycle from user research to stakeholder comms. Gambit turns AI assistants into opinionated PM collaborators: write feature requests, run sprint reviews, generate OKRs, build roadmaps, and synthesize user research, all through structured, reusable skills.</p>
+        <div class="project-tags">
+          <span class="project-tag">AI Agents</span>
+          <span class="project-tag">Product Management</span>
+          <span class="project-tag">Claude</span>
+          <span class="project-tag">Gemini</span>
+          <span class="project-tag">Open Source</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/felipecabargas/gambit" target="_blank" rel="noopener">View on GitHub ↗</a>
+          <span class="project-meta">github.com/felipecabargas/gambit</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">Parcel Tracking MCP</div>
+          <span class="project-status">Active</span>
+        </div>
+        <p class="project-desc">An MCP server for worldwide parcel tracking via the 17track API. Works with Claude and any MCP-compatible AI assistant — lets you track shipments directly from your AI chat without leaving the conversation.</p>
+        <div class="project-tags">
+          <span class="project-tag">MCP</span>
+          <span class="project-tag">Claude</span>
+          <span class="project-tag">API Integration</span>
+          <span class="project-tag">Open Source</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/felipecabargas/parcel-tracking-mcp" target="_blank" rel="noopener">View on GitHub ↗</a>
+          <span class="project-meta">github.com/felipecabargas/parcel-tracking-mcp</span>
+        </div>
+      </div>
+
+      <div class="project-card placeholder">
+        <div class="project-header">
+          <div class="project-name">More coming soon</div>
+          <span class="project-status wip">WIP</span>
+        </div>
+        <p class="project-desc">More projects will appear here as I build and open-source them.</p>
+      </div>
+
+    </div>
   </div>
 
-  <div class="project-list">
-
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-name">Gambit</div>
-        <span class="project-status">Active</span>
-      </div>
-      <p class="project-desc">A collection of PM skills and workflow agents for Claude and Gemini — covering the full product lifecycle from user research to stakeholder comms. Gambit turns AI assistants into opinionated PM collaborators: write feature requests, run sprint reviews, generate OKRs, build roadmaps, and synthesize user research, all through structured, reusable skills.</p>
-      <div class="project-tags">
-        <span class="project-tag">AI Agents</span>
-        <span class="project-tag">Product Management</span>
-        <span class="project-tag">Claude</span>
-        <span class="project-tag">Gemini</span>
-        <span class="project-tag">Open Source</span>
-      </div>
-      <div class="project-footer">
-        <a class="project-link" href="https://github.com/felipecabargas/gambit" target="_blank" rel="noopener">View on GitHub ↗</a>
-        <span class="project-meta">github.com/felipecabargas/gambit</span>
-      </div>
+  <div data-lang="es" hidden>
+    <div class="page-header">
+      <h1 class="page-title">Proyectos</h1>
+      <p class="page-desc">Cosas que he construido — herramientas, experimentos y trabajo de código abierto en la intersección entre producto e IA.</p>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-name">Parcel Tracking MCP</div>
-        <span class="project-status">Active</span>
-      </div>
-      <p class="project-desc">An MCP server for worldwide parcel tracking via the 17track API. Works with Claude and any MCP-compatible AI assistant — lets you track shipments directly from your AI chat without leaving the conversation.</p>
-      <div class="project-tags">
-        <span class="project-tag">MCP</span>
-        <span class="project-tag">Claude</span>
-        <span class="project-tag">API Integration</span>
-        <span class="project-tag">Open Source</span>
-      </div>
-      <div class="project-footer">
-        <a class="project-link" href="https://github.com/felipecabargas/parcel-tracking-mcp" target="_blank" rel="noopener">View on GitHub ↗</a>
-        <span class="project-meta">github.com/felipecabargas/parcel-tracking-mcp</span>
-      </div>
-    </div>
+    <div class="project-list">
 
-    <div class="project-card placeholder">
-      <div class="project-header">
-        <div class="project-name">More coming soon</div>
-        <span class="project-status wip">WIP</span>
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">Gambit</div>
+          <span class="project-status">Activo</span>
+        </div>
+        <p class="project-desc">Una colección de skills y agentes de flujo de trabajo para Claude y Gemini — que cubre el ciclo completo de producto, desde la investigación de usuarios hasta las comunicaciones con stakeholders. Gambit convierte los asistentes de IA en colaboradores de PM con criterio propio: escribe feature requests, ejecuta sprint reviews, genera OKRs, construye roadmaps y sintetiza investigación de usuarios, todo a través de skills estructurados y reutilizables.</p>
+        <div class="project-tags">
+          <span class="project-tag">Agentes de IA</span>
+          <span class="project-tag">Product Management</span>
+          <span class="project-tag">Claude</span>
+          <span class="project-tag">Gemini</span>
+          <span class="project-tag">Código Abierto</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/felipecabargas/gambit" target="_blank" rel="noopener">Ver en GitHub ↗</a>
+          <span class="project-meta">github.com/felipecabargas/gambit</span>
+        </div>
       </div>
-      <p class="project-desc">More projects will appear here as I build and open-source them.</p>
-    </div>
 
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">Parcel Tracking MCP</div>
+          <span class="project-status">Activo</span>
+        </div>
+        <p class="project-desc">Un servidor MCP para seguimiento de paquetes en todo el mundo mediante la API de 17track. Funciona con Claude y cualquier asistente de IA compatible con MCP — permite rastrear envíos directamente desde tu chat de IA sin salir de la conversación.</p>
+        <div class="project-tags">
+          <span class="project-tag">MCP</span>
+          <span class="project-tag">Claude</span>
+          <span class="project-tag">Integración de API</span>
+          <span class="project-tag">Código Abierto</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/felipecabargas/parcel-tracking-mcp" target="_blank" rel="noopener">Ver en GitHub ↗</a>
+          <span class="project-meta">github.com/felipecabargas/parcel-tracking-mcp</span>
+        </div>
+      </div>
+
+      <div class="project-card placeholder">
+        <div class="project-header">
+          <div class="project-name">Más próximamente</div>
+          <span class="project-status wip">En progreso</span>
+        </div>
+        <p class="project-desc">Más proyectos irán apareciendo aquí a medida que los construya y los abra como código abierto.</p>
+      </div>
+
+    </div>
   </div>
+
 </main>
 
 <footer class="site-footer">
@@ -84,6 +149,33 @@
     <a href="/feed.xml">RSS</a>
   </div>
 </footer>
+
+<script>
+  (function () {
+    function detect() {
+      var param = new URLSearchParams(location.search).get('lang');
+      if (param === 'en' || param === 'es') return param;
+      if ((navigator.language || '').toLowerCase().startsWith('es')) return 'es';
+      return 'en';
+    }
+    function apply(lang) {
+      document.querySelectorAll('[data-lang]').forEach(function (el) {
+        el.hidden = el.dataset.lang !== lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      var url = new URL(location.href);
+      lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+      document.documentElement.lang = lang;
+    }
+    apply(detect());
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { apply(btn.dataset.lang); });
+    });
+  })();
+</script>
 
 </body>
 </html>
