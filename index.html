@@ -23,12 +23,12 @@
   <p class="tagline">Thinking out loud on product, AI, and what it means to build responsibly.</p>
 
   <div class="filter-tabs" role="tablist">
-    <button class="tab active" onclick="filterArticles('all', this)">All</button>
-    <button class="tab" onclick="filterArticles('ai', this)">AI</button>
-    <button class="tab" onclick="filterArticles('product', this)">Product</button>
-    <button class="tab" onclick="filterArticles('governance', this)">Governance</button>
-    <button class="tab" onclick="filterArticles('startups', this)">Startups</button>
-    <button class="tab" onclick="filterArticles('policy', this)">Policy</button>
+    <button class="tab active" role="tab" aria-selected="true" onclick="filterArticles('all', this)">All</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('ai', this)">AI</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('product', this)">Product</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('governance', this)">Governance</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('startups', this)">Startups</button>
+    <button class="tab" role="tab" aria-selected="false" onclick="filterArticles('policy', this)">Policy</button>
   </div>
 
   <div class="article-list">
@@ -37,7 +37,7 @@
     <!-- EXAMPLE — replace with your first real article -->
     <div class="article-item" data-topics="ai governance">
       <div class="article-left">
-        <a class="article-title" href="/articles/the-ai-governance-gap">The AI Governance Gap No One Is Talking About</a>
+        <span class="article-title">The AI Governance Gap No One Is Talking About</span>
         <div class="article-excerpt">Why most companies are optimizing for compliance theater instead of actual risk reduction.</div>
         <div class="article-tags">
           <span class="article-tag">AI</span>
@@ -71,8 +71,12 @@
 
 <script>
   function filterArticles(topic, el) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
     el.classList.add('active');
+    el.setAttribute('aria-selected', 'true');
     document.querySelectorAll('.article-item').forEach(item => {
       const topics = (item.dataset.topics || '').split(' ');
       item.classList.toggle('hidden', topic !== 'all' && !topics.includes(topic));
