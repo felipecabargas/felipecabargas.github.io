@@ -20,7 +20,6 @@ function escapeAttr(str) {
 function buildArticleContent(slug, frontmatter, bodyHTML, lang, originalLang) {
   const { title, date, readtime, tags = [], excerpt, type } = frontmatter;
   const isNote = type === 'note';
-  const articleUrl = `${SITE_URL}/articles/${slug}`;
   const typeClass = isNote ? 'type-note' : 'type-essay';
   const typeLabel = isNote ? (lang === 'es' ? 'Nota' : 'Note') : (lang === 'es' ? 'Ensayo' : 'Essay');
   const shareLabel = isNote
@@ -181,6 +180,7 @@ function buildPageHTML(slug, enData, esData) {
       var url = new URL(location.href);
       lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
       history.replaceState(null, '', url);
+      document.documentElement.lang = lang;
       var encoded = encodeURIComponent(location.href);
       document.querySelectorAll('.share-linkedin').forEach(function (el) {
         el.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encoded;

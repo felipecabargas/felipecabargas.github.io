@@ -136,6 +136,7 @@
       var url = new URL(location.href);
       lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
       history.replaceState(null, '', url);
+      document.documentElement.lang = lang;
       var encoded = encodeURIComponent(location.href);
       document.querySelectorAll('.share-linkedin').forEach(function (el) {
         el.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encoded;
