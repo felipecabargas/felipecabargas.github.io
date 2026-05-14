@@ -1,77 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Cabargas – Digital Strategy & Governance</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felipe Cabargas</title>
+  <meta name="description" content="Thinking out loud on product, AI, and what it means to build responsibly.">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <div class="language-switch">
-        <a href="da/index.html">DA</a> |
-        <a href="es/index.html">ES</a>
-    </div>
-</header>
-<section class="hero">
-    <h1>Digital strategies that scale and comply.</h1>
-    <p>Helping startups in <strong>Chile</strong> and <strong>Denmark</strong> create actionable strategies, from MVP to global expansion, with a focus on <strong>AI</strong>, digital governance, and product management.</p>
-    <br />
-    <!-- Google Calendar Appointment Scheduling begin -->
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-    <script>
-    (function() {
-    var target = document.currentScript;
-    window.addEventListener('load', function() {
-        calendar.schedulingButton.load({
-        url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1JXa41XKWYmlpMsvRgV60st3iiWbOdC8F0R-9dNFD57dayGQIs5EZSYI1o8UUrjO4kRtHz2qiA?gv=true',
-        color: '#E4C441',
-        label: 'Book a meeting',
-        target,
-        });
-    });
-    })();
-    </script>
-    <!-- end Google Calendar Appointment Scheduling -->
-</section>
-<section id="intro">
-    <h2>Welcome</h2>
-    <p>Hi, I’m <strong>Felipe Cabargas</strong>, product professional with over a decade of experience driving growth, compliance, and innovation in SaaS and digital products. Whether you’re launching your first MVP, optimizing a product line, or preparing your company for an AI-driven future, I can help you build a clear, scalable, and actionable roadmap.</p>
-</section>
-<section id="services">
-    <h2>Let's talk!</h2>
-    <div class="service-cards">
-        <!--<div class="card">
-            <h3>Board Advisory</h3>
-            <p>Digital transformation, AI integration, and compliance strategy for boards and executives.</p>
-            <p><em>Turn uncertainty into clarity.</em></p>
-        </div>-->
-        <div class="card">
-            <h3>Startup Acceleration</h3>
-            <p>From concept to market-ready product: strategy sprints, product-market fit, and scaling roadmaps.</p>
-            <p><em>Move fast and with the right foundation.</em></p>
+
+<nav class="site-nav">
+  <a class="site-name" href="/">Felipe Cabargas</a>
+  <div class="nav-links">
+    <a href="/" class="nav-active">Writing</a>
+    <a href="/projects">Projects</a>
+    <a href="/about">About</a>
+    <a class="consulting-link" href="https://cabargas.consulting" target="_blank" rel="noopener">Consulting ↗</a>
+  </div>
+</nav>
+
+<main class="page">
+  <p class="tagline">Thinking out loud on product, AI, and what it means to build responsibly.</p>
+
+  <div class="filter-tabs" role="tablist">
+    <button class="tab active" onclick="filterArticles('all', this)">All</button>
+    <button class="tab" onclick="filterArticles('ai', this)">AI</button>
+    <button class="tab" onclick="filterArticles('product', this)">Product</button>
+    <button class="tab" onclick="filterArticles('governance', this)">Governance</button>
+    <button class="tab" onclick="filterArticles('startups', this)">Startups</button>
+    <button class="tab" onclick="filterArticles('policy', this)">Policy</button>
+  </div>
+
+  <div class="article-list">
+    <!-- Add new articles here, newest first. data-topics is space-separated lowercase. -->
+
+    <!-- EXAMPLE — replace with your first real article -->
+    <div class="article-item" data-topics="ai governance">
+      <div class="article-left">
+        <a class="article-title" href="/articles/the-ai-governance-gap">The AI Governance Gap No One Is Talking About</a>
+        <div class="article-excerpt">Why most companies are optimizing for compliance theater instead of actual risk reduction.</div>
+        <div class="article-tags">
+          <span class="article-tag">AI</span>
+          <span class="article-tag">Governance</span>
         </div>
-        <div class="card">
-            <h3>AI & Governance Consulting</h3>
-            <p>Tailored audits and frameworks to align your operations with AI readiness, WCAG, GDPR, and LATAM regulations.</p>
-            <p><em>Stay innovative, stay compliant.</em></p>
-        </div>
+      </div>
+      <div class="article-meta">
+        <span class="article-type type-essay">Essay</span>
+        <span class="article-date">May 2026</span>
+      </div>
     </div>
-</section>
-<section id="contact">
-    <h2>Ready to take your strategy to the next level?</h2>
-    <p>Let’s connect! Book your call and let’s discuss how we can work together.</p>
-    <p><a href="mailto:felipe@cabargas.com" style="background:#001d39;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none;font-weight:bold;">Email Me</a></p>
-</section>
-<footer class="footer">
-    <p>&copy; 2025 Felipe Cabargas. All rights reserved.</p>
+
+  </div>
+
+  <div class="consulting-cta">
+    <div class="cta-text">
+      <strong>Need a strategy, not just an opinion?</strong>
+      I work with startups on product, AI readiness, and governance.
+    </div>
+    <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span>© 2026 Felipe Cabargas</span>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/felipecabargas" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/felipecabargas" target="_blank" rel="noopener">GitHub</a>
+  </div>
 </footer>
+
+<script>
+  function filterArticles(topic, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.article-item').forEach(item => {
+      const topics = (item.dataset.topics || '').split(' ');
+      item.classList.toggle('hidden', topic !== 'all' && !topics.includes(topic));
+    });
+  }
+</script>
+
 </body>
 </html>
