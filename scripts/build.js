@@ -17,6 +17,7 @@ function escapeAttr(str) {
     .replace(/>/g, '&gt;');
 }
 
+// esData is null when no es.md exists; populated when both language files are present
 // Fix 5: single buildPageHTML replacing the two near-identical builders
 function buildPageHTML(slug, enData, esData) {
   const { frontmatter, bodyHTML } = enData;
@@ -122,8 +123,13 @@ ${noteBanner}
 function readLang(slugDir, lang) {
   const fp = path.join(slugDir, `${lang}.md`);
   if (!fs.existsSync(fp)) return null;
-  const { data: frontmatter, content } = matter(fs.readFileSync(fp, 'utf8'));
-  return { frontmatter, bodyHTML: marked(content) };
+  try {
+    const { data: frontmatter, content } = matter(fs.readFileSync(fp, 'utf8'));
+    return { frontmatter, bodyHTML: marked(content) };
+  } catch (err) {
+    console.error(`Error parsing ${fp}: ${err.message}`);
+    return null;
+  }
 }
 
 function escapeXML(str) {
@@ -243,12 +249,13 @@ function main() {
       console.warn(`Warning: ${slug} has no sortDate — article may sort incorrectly.`);
     }
 
-    const pageHTML = buildPageHTML(slug, en, null);
+    const es = readLang(slugDir, 'es');
+    const pageHTML = buildPageHTML(slug, en, null); // null until Task 2 wires in bilingual HTML
     const outFile = path.join(ARTICLES_OUT, `${slug}.html`);
     fs.writeFileSync(outFile, pageHTML);
     console.log(`Built: articles/${slug}.html`);
 
-    articles.push({ frontmatter: en.frontmatter, hasEs: false });
+    articles.push({ frontmatter: en.frontmatter, hasEs: !!es });
   }
 
   // Fix 3: sort by sortDate (ISO YYYY-MM) with graceful fallback
