@@ -4,7 +4,7 @@ date: "May 14, 2026"
 sortDate: "2026-05"
 type: essay
 topics: [ai, governance, startups]
-tags: [AI, Culture, Governance, Startups]
+tags: [AI, Governance, Startups]
 excerpt: "AI agents promise infinite productivity — but constant supervision, hallucination debugging, and non-deterministic output may be creating a new kind of burnout faster than any manual process did before."
 readtime: "3 min read"
 slug: efficiency-paradox
