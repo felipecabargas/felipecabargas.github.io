@@ -407,8 +407,3 @@ h1.article-title {
 }
 .project-link:hover { color: #003d73; }
 .project-meta { font-size: 11px; color: #bbb; }
-
-/* ── PAGE HEADER ── */
-.page-header { margin-bottom: 40px; padding-top: 48px; }
-.page-title { font-size: 22px; font-weight: 700; color: #001d39; letter-spacing: -0.4px; margin-bottom: 8px; }
-.page-desc { font-size: 14px; color: #888; line-height: 1.6; }
