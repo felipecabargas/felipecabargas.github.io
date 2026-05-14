@@ -3,7 +3,7 @@ const path = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 
-const SITE_URL = 'https://felipecabargas.github.io';
+const SITE_URL = 'https://cabargas.com';
 const ARTICLES_SRC = path.join(__dirname, '..', '_articles');
 const ARTICLES_OUT = path.join(__dirname, '..', 'articles');
 const INDEX_HTML = path.join(__dirname, '..', 'index.html');
