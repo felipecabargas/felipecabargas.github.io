@@ -18,8 +18,9 @@ function escapeAttr(str) {
 }
 
 // Fix 5: single buildPageHTML replacing the two near-identical builders
-function buildPageHTML(frontmatter, bodyHTML) {
-  const { title, date, readtime, tags = [], slug, excerpt, type } = frontmatter;
+function buildPageHTML(slug, enData, esData) {
+  const { frontmatter, bodyHTML } = enData;
+  const { title, date, readtime, tags = [], excerpt, type } = frontmatter;
   const isNote = type === 'note';
   const articleUrl = `${SITE_URL}/articles/${slug}`;
   const tagPills = tags.map(t => `<span class="article-topic-tag">${escapeAttr(t)}</span>`).join('\n        ');
@@ -118,6 +119,13 @@ ${noteBanner}
 </html>`;
 }
 
+function readLang(slugDir, lang) {
+  const fp = path.join(slugDir, `${lang}.md`);
+  if (!fs.existsSync(fp)) return null;
+  const { data: frontmatter, content } = matter(fs.readFileSync(fp, 'utf8'));
+  return { frontmatter, bodyHTML: marked(content) };
+}
+
 function escapeXML(str) {
   return String(str)
     .replace(/&/g, '&amp;')
@@ -200,46 +208,47 @@ function main() {
   // Fix 2: ensure articles/ output directory exists
   fs.mkdirSync(ARTICLES_OUT, { recursive: true });
 
-  const files = fs.readdirSync(ARTICLES_SRC).filter(f => f.endsWith('.md'));
+  const slugs = fs.readdirSync(ARTICLES_SRC, { withFileTypes: true })
+    .filter(e => e.isDirectory())
+    .map(e => e.name);
 
-  if (files.length === 0) {
-    console.log('No markdown files in _articles/ — nothing to build.');
+  if (slugs.length === 0) {
+    console.log('No article directories in _articles/ — nothing to build.');
     return;
   }
 
   const articles = [];
 
-  for (const file of files) {
-    const src = path.join(ARTICLES_SRC, file);
-    const raw = fs.readFileSync(src, 'utf8');
-    const { data: frontmatter, content } = matter(raw);
+  for (const slug of slugs) {
+    const slugDir = path.join(ARTICLES_SRC, slug);
+    const en = readLang(slugDir, 'en');
 
-    frontmatter.slug = frontmatter.slug || path.basename(file, '.md');
-    frontmatter.topics = frontmatter.topics || [];
-    frontmatter.tags = frontmatter.tags || [];
-
-    // Fix 4: required frontmatter validation
-    const required = ['title', 'date', 'type', 'excerpt'];
-    const missing = required.filter(k => !frontmatter[k]);
-    if (missing.length > 0) {
-      console.error(`Skipping ${file}: missing required frontmatter fields: ${missing.join(', ')}`);
+    if (!en) {
+      console.error(`Skipping ${slug}: missing en.md`);
       continue;
     }
 
-    // Fix 3: warn when sortDate is missing
-    if (!frontmatter.sortDate) {
-      console.warn(`Warning: ${file} has no sortDate — article may sort incorrectly. Add sortDate: "YYYY-MM" to frontmatter.`);
+    en.frontmatter.slug = slug;
+    en.frontmatter.topics = en.frontmatter.topics || [];
+    en.frontmatter.tags = en.frontmatter.tags || [];
+
+    const required = ['title', 'date', 'type', 'excerpt'];
+    const missing = required.filter(k => !en.frontmatter[k]);
+    if (missing.length > 0) {
+      console.error(`Skipping ${slug}: missing required frontmatter fields: ${missing.join(', ')}`);
+      continue;
     }
 
-    const bodyHTML = marked(content);
-    // Fix 5: use unified buildPageHTML
-    const pageHTML = buildPageHTML(frontmatter, bodyHTML);
+    if (!en.frontmatter.sortDate) {
+      console.warn(`Warning: ${slug} has no sortDate — article may sort incorrectly.`);
+    }
 
-    const outFile = path.join(ARTICLES_OUT, `${frontmatter.slug}.html`);
+    const pageHTML = buildPageHTML(slug, en, null);
+    const outFile = path.join(ARTICLES_OUT, `${slug}.html`);
     fs.writeFileSync(outFile, pageHTML);
-    console.log(`Built: articles/${frontmatter.slug}.html`);
+    console.log(`Built: articles/${slug}.html`);
 
-    articles.push({ frontmatter });
+    articles.push({ frontmatter: en.frontmatter, hasEs: false });
   }
 
   // Fix 3: sort by sortDate (ISO YYYY-MM) with graceful fallback
