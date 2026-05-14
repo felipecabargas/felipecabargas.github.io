@@ -4,7 +4,7 @@ date: "September 11, 2025"
 sortDate: "2025-09"
 type: essay
 topics: [ai, product, startups]
-tags: [AI, SaaS, Product Strategy, Startups]
+tags: [AI, Product Strategy, Startups]
 excerpt: "AI adoption in SaaS is echoing the shift from feature phones to smartphones. The winners won't be those who ship the most AI features — they'll be the ones who bet on data."
 readtime: "3 min read"
 slug: feature-saas-vs-smart-saas
