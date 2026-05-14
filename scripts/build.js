@@ -45,6 +45,7 @@ function buildPageHTML(frontmatter, bodyHTML) {
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="${escapeAttr(title)}">
   <meta name="twitter:description" content="${escapeAttr(excerpt)}">
+  <link rel="alternate" type="application/rss+xml" title="Felipe Cabargas" href="/feed.xml">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -109,11 +110,54 @@ ${noteBanner}
   <div class="social-links">
     <a href="https://linkedin.com/in/cabargas" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://github.com/felipecabargas" target="_blank" rel="noopener">GitHub</a>
+    <a href="/feed.xml">RSS</a>
   </div>
 </footer>
 
 </body>
 </html>`;
+}
+
+function escapeXML(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function generateFeed(articles) {
+  const feedPath = path.join(__dirname, '..', 'feed.xml');
+  const lastBuild = new Date().toUTCString();
+  const items = articles.map(({ frontmatter }) => {
+    const { title, excerpt, slug, date } = frontmatter;
+    const url = `${SITE_URL}/articles/${slug}`;
+    const pubDate = new Date(date).toUTCString();
+    return `    <item>
+      <title>${escapeXML(title)}</title>
+      <link>${url}</link>
+      <description>${escapeXML(excerpt)}</description>
+      <pubDate>${pubDate}</pubDate>
+      <guid isPermaLink="true">${url}</guid>
+    </item>`;
+  }).join('\n');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Felipe Cabargas — Views Are My Own</title>
+    <link>${SITE_URL}</link>
+    <description>Thinking out loud on product, AI, and what it means to build responsibly.</description>
+    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>${lastBuild}</lastBuildDate>
+${items}
+  </channel>
+</rss>`;
+
+  fs.writeFileSync(feedPath, xml);
+  console.log('Generated feed.xml');
 }
 
 function buildArticleItem(frontmatter) {
@@ -207,6 +251,7 @@ function main() {
 
   updateIndex(articles);
   console.log('Updated index.html article list.');
+  generateFeed(articles);
 }
 
 main();

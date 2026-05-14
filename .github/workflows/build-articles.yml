@@ -37,5 +37,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add articles/ index.html
+          git add articles/ index.html feed.xml
           git diff --cached --quiet || (git pull --rebase && git commit -m "build: regenerate articles from markdown [skip ci]" && git push)

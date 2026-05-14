@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Felipe Cabargas — Views Are My Own</title>
+    <link>https://cabargas.com</link>
+    <description>Thinking out loud on product, AI, and what it means to build responsibly.</description>
+    <atom:link href="https://cabargas.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 May 2026 21:30:41 GMT</lastBuildDate>
+    <item>
+      <title>Chile&apos;s Privacy Law Deadline Is Closer Than You Think — And Your Legal Team Can&apos;t Fix This Alone</title>
+      <link>https://cabargas.com/articles/chile-data-privacy-law-2026</link>
+      <description>Ley Nº 21.719 becomes fully enforceable on December 1, 2026. Most organizations doing business in Chile are delegating this to their legal departments — the same mistake European companies made before GDPR hit.</description>
+      <pubDate>Thu, 30 Apr 2026 22:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://cabargas.com/articles/chile-data-privacy-law-2026</guid>
+    </item>
+    <item>
+      <title>The Efficiency Paradox: Burnout in the Agentic Era</title>
+      <link>https://cabargas.com/articles/efficiency-paradox</link>
+      <description>AI agents promise infinite productivity — but constant supervision, hallucination debugging, and non-deterministic output may be creating a new kind of burnout faster than any manual process did before.</description>
+      <pubDate>Wed, 13 May 2026 22:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://cabargas.com/articles/efficiency-paradox</guid>
+    </item>
+    <item>
+      <title>Product Teams Are Losing the AI Race — And It&apos;s Not About Budget</title>
+      <link>https://cabargas.com/articles/product-teams-losing-the-ai-race</link>
+      <description>The gap isn&apos;t budget or leadership buy-in. It&apos;s a technical understanding gap that&apos;s quietly becoming an abyss — and most product teams don&apos;t see it coming.</description>
+      <pubDate>Tue, 14 Apr 2026 22:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://cabargas.com/articles/product-teams-losing-the-ai-race</guid>
+    </item>
+    <item>
+      <title>It&apos;s 2007 All Over Again: Feature-SaaS vs. Smart-SaaS</title>
+      <link>https://cabargas.com/articles/feature-saas-vs-smart-saas</link>
+      <description>AI adoption in SaaS is echoing the shift from feature phones to smartphones. The winners won&apos;t be those who ship the most AI features — they&apos;ll be the ones who bet on data.</description>
+      <pubDate>Wed, 10 Sep 2025 22:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://cabargas.com/articles/feature-saas-vs-smart-saas</guid>
+    </item>
+    <item>
+      <title>The Hate on Vibe-Coding, and Why It&apos;s an Overreaction</title>
+      <link>https://cabargas.com/articles/the-hate-on-vibe-coding</link>
+      <description>AI-driven &apos;vibe-coding&apos; isn&apos;t the threat people think it is — and the outrage reveals more about the industry&apos;s anxieties than any real technical risk.</description>
+      <pubDate>Tue, 02 Sep 2025 22:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://cabargas.com/articles/the-hate-on-vibe-coding</guid>
+    </item>
+  </channel>
+</rss>
