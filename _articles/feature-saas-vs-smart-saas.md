@@ -1,7 +1,7 @@
 ---
 title: "It's 2007 All Over Again: Feature-SaaS vs. Smart-SaaS"
 date: "September 11, 2025"
-sortDate: "2025-09"
+sortDate: "2025-09-11"
 type: essay
 topics: [ai, product, startups]
 tags: [AI, Product Strategy, Startups]

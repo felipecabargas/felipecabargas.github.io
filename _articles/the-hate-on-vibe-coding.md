@@ -1,7 +1,7 @@
 ---
 title: "The Hate on Vibe-Coding, and Why It's an Overreaction"
 date: "September 3, 2025"
-sortDate: "2025-09"
+sortDate: "2025-09-03"
 type: essay
 topics: [ai, product, governance]
 tags: [AI, Engineering, Governance, Product]

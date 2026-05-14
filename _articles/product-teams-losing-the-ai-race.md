@@ -1,7 +1,7 @@
 ---
 title: "Product Teams Are Losing the AI Race — And It's Not About Budget"
 date: "April 15, 2026"
-sortDate: "2026-04"
+sortDate: "2026-04-15"
 type: essay
 topics: [ai, product, governance]
 tags: [AI, Product Management, Governance, Engineering]

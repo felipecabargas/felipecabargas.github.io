@@ -1,7 +1,7 @@
 ---
 title: "Chile's Privacy Law Deadline Is Closer Than You Think — And Your Legal Team Can't Fix This Alone"
 date: "May 1, 2026"
-sortDate: "2026-05"
+sortDate: "2026-05-01"
 type: essay
 topics: [governance, policy, ai]
 tags: [Governance, Policy, Privacy, Chile]

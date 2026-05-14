@@ -1,7 +1,7 @@
 ---
 title: "The Efficiency Paradox: Burnout in the Agentic Era"
 date: "May 14, 2026"
-sortDate: "2026-05"
+sortDate: "2026-05-14"
 type: essay
 topics: [ai, governance, startups]
 tags: [AI, Governance, Startups]
