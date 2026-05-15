@@ -6,7 +6,14 @@
     <description>Thinking out loud on product, AI, and what it means to build responsibly.</description>
     <atom:link href="https://cabargas.com/feed.xml" rel="self" type="application/rss+xml"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 May 2026 18:25:59 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2026 18:30:49 GMT</lastBuildDate>
+    <item>
+      <title>Why I Joined the Chilean Chamber of Artificial Intelligence (and Why It Matters)</title>
+      <link>https://cabargas.com/articles/camara-chilena-ia</link>
+      <description>AI governance in Chile needs diverse voices — especially from product. Here&apos;s why I joined the Chilean Chamber of Artificial Intelligence and what I hope to contribute.</description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://cabargas.com/articles/camara-chilena-ia</guid>
+    </item>
     <item>
       <title>The Efficiency Paradox: Burnout in the Agentic Era</title>
       <link>https://cabargas.com/articles/efficiency-paradox</link>
