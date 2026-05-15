@@ -18,9 +18,9 @@
     <a href="/about"><span data-lang="en">About</span><span data-lang="es" hidden>Sobre mí</span></a>
     <a class="consulting-link" href="https://cabargas.consulting" target="_blank" rel="noopener">Consulting ↗</a>
     <div class="lang-switcher">
-      <button class="lang-btn" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="en">EN</button>
       <span class="lang-sep">·</span>
-      <button class="lang-btn" data-lang="es">Español</button>
+      <button class="lang-btn" data-lang="es">ES</button>
     </div>
   </div>
 </nav>
@@ -159,7 +159,7 @@
       return 'en';
     }
     function apply(lang) {
-      document.querySelectorAll('[data-lang]').forEach(function (el) {
+      document.querySelectorAll('[data-lang]:not(.lang-btn)').forEach(function (el) {
         el.hidden = el.dataset.lang !== lang;
       });
       document.querySelectorAll('.lang-btn').forEach(function (btn) {

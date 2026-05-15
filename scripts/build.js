@@ -106,9 +106,9 @@ function buildPageHTML(slug, enData, esData) {
 
   const langSwitcher = hasEs ? `
   <div class="lang-switcher">
-    <button class="lang-btn" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="en">EN</button>
     <span class="lang-sep">·</span>
-    <button class="lang-btn" data-lang="es">Español</button>
+    <button class="lang-btn" data-lang="es">ES</button>
   </div>` : '';
 
   const enContent = buildArticleContent(slug, enFm, enData.bodyHTML, 'en', originalLang);
@@ -261,7 +261,7 @@ function buildArticleItem(frontmatter, hasEs, esFrontmatter) {
   const typeLabelEs = type === 'note' ? 'Nota' : 'Ensayo';
   const topicsAttr = topics.join(' ');
   const tagPills = tags.map(t => `          <span class="article-tag">${escapeAttr(t)}</span>`).join('\n');
-  const esBadge = hasEs ? ' <span class="lang-badge">ES</span>' : '';
+  const esBadge = '';
 
   const esTitle = esFrontmatter ? esFrontmatter.title : title;
   const esExcerpt = esFrontmatter ? esFrontmatter.excerpt : excerpt;
