@@ -132,6 +132,7 @@ function buildPageHTML(slug, enData, esData) {
   <meta name="twitter:description" content="${escapeAttr(excerpt)}">
   <link rel="alternate" hreflang="en" href="${articleUrl}">${hreflangEs}
   <link rel="alternate" type="application/rss+xml" title="Felipe Cabargas" href="/feed.xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
