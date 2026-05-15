@@ -107,9 +107,9 @@ body {
 }
 .filter-tabs {
   display: flex;
+  flex-wrap: wrap;
   border-bottom: 1px solid #e8e8e0;
   margin-bottom: 28px;
-  overflow-x: auto;
 }
 .tab {
   font-size: 11px;
