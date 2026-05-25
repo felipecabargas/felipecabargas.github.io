@@ -82,6 +82,20 @@ body {
   text-decoration: none;
   flex-shrink: 0;
 }
+.cta-btn-secondary {
+  background: transparent;
+  color: #E4C441;
+  border: 1px solid #E4C441;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 4px;
+  white-space: nowrap;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.cta-btn-secondary:hover { background: rgba(228,196,65,0.12); }
+.cta-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; flex-wrap: wrap; }
 
 /* ── FOOTER ── */
 .site-footer {
