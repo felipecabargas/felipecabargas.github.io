@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducing Gambit: PM Skills That Actually QA Themselves — Felipe Cabargas</title>
+  <meta name="description" content="I built an open-source library of PM skills for AI assistants. Not to make PMs faster, but to make AI outputs less likely to quietly fail them.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Introducing Gambit: PM Skills That Actually QA Themselves">
+  <meta property="og:description" content="I built an open-source library of PM skills for AI assistants. Not to make PMs faster, but to make AI outputs less likely to quietly fail them.">
+  <meta property="og:url" content="https://cabargas.com/articles/introducing-gambit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Introducing Gambit: PM Skills That Actually QA Themselves">
+  <meta name="twitter:description" content="I built an open-source library of PM skills for AI assistants. Not to make PMs faster, but to make AI outputs less likely to quietly fail them.">
+  <link rel="alternate" hreflang="en" href="https://cabargas.com/articles/introducing-gambit">
+  <link rel="alternate" hreflang="es" href="https://cabargas.com/articles/introducing-gambit?lang=es">
+  <link rel="alternate" type="application/rss+xml" title="Felipe Cabargas" href="/feed.xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="site-name" href="/">Felipe Cabargas</a>
+  <div class="nav-links">
+    <a href="/" class="back-link">← All writing</a>
+    <a href="/about">About</a>
+    <a class="consulting-link" href="https://cabargas.consulting" target="_blank" rel="noopener">Consulting ↗</a>
+  <div class="lang-switcher">
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="es">ES</button>
+  </div>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="lang-content" data-lang="en">
+  <article class="article">
+    <header class="article-header">
+      <div class="article-eyebrow">
+        <span class="article-type type-essay">Essay</span>
+        <span class="article-date">June 26, 2026</span>
+        <span class="dot-sep">·</span>
+        <span class="article-readtime">5 min read</span>
+      </div>
+      <h1 class="article-title">Introducing Gambit: PM Skills That Actually QA Themselves</h1>
+      <div class="article-topic-tags">
+        <span class="article-topic-tag">AI</span>
+        <span class="article-topic-tag">Product Management</span>
+        <span class="article-topic-tag">Open Source</span>
+      </div>
+    </header>
+
+
+    <div class="article-body">
+      <p>I&#39;ve been using AI in my PM work long enough to know what the failure mode looks like.</p>
+<p>You get faster. Feature requests come out cleaner. Discovery summaries take half the time. And then, three sprints later, you&#39;re in a retro trying to explain why a feature that looked solid on paper shipped with the wrong acceptance criteria, or missed an edge case the research should have caught, or solved a problem users never actually had.</p>
+<p>The AI didn&#39;t lie to you. It gave you a plausible output. You didn&#39;t catch it because you were reviewing it the same way you review a colleague&#39;s draft, scanning for obvious errors without interrogating the reasoning underneath.</p>
+<p>That&#39;s the problem Gambit is trying to fix.</p>
+<h2>What Gambit Is</h2>
+<p><a href="https://github.com/felipecabargas/gambit">Gambit</a> is an open-source library of PM skills for AI assistants. Structured workflows, built-in quality gates, covering the most common PM tasks: feature requests, discovery mapping, roadmaps, PRDs, user stories, release notes.</p>
+<p>It&#39;s available as a plugin on <a href="https://claude.com/plugins">Claude&#39;s community marketplace</a> and indexed in the Antigravity/Gemini CLI extensions directory.</p>
+<p>The skills aren&#39;t prompts. They&#39;re workflows. And the difference matters.</p>
+<p>A prompt asks the model to produce something. A skill asks the model to produce something and then check whether it actually should have. Every Gambit skill has checkpoints baked in, moments where the model validates its own output against a standard before it reaches you.</p>
+<p>The feature request skill won&#39;t assemble a FR until it&#39;s confirmed that acceptance criteria cover the happy path, the edge cases, and the failure states. The roadmap skill won&#39;t output until each initiative maps to a strategic objective. The discovery skill won&#39;t just summarize what users said. It&#39;ll flag where the evidence is thin and where a pattern might be a coincidence.</p>
+<h2>Why This Matters</h2>
+<p>The default advice for using AI in PM work is better prompting. Be more specific. Add context. Give examples. That advice is correct. It&#39;s also not enough.</p>
+<p>The problem isn&#39;t prompting. It&#39;s that AI outputs are epistemically uncertain. You can&#39;t reliably know if an output is right, even when it looks right. A well-written feature request with bad acceptance criteria reads almost identically to one with good acceptance criteria. The surface is indistinguishable.</p>
+<p>You can&#39;t QA an AI output the way you QA a build. A build works or it doesn&#39;t. An AI output is always plausible, and plausible is not the same as correct.</p>
+<p>Gambit moves the QA into the workflow. If the model has to satisfy a quality gate before generating output, you catch the failure earlier and at a lower cost. Not always. But significantly more often.</p>
+<p>The philosophy underneath is simple: reduce uncertainty in the process so you can tolerate uncertainty in the outcome. You&#39;re going to ship AI-generated artifacts with imperfect information. The question is whether you do it with or without a structured check on the work.</p>
+<h2>What&#39;s in the Library</h2>
+<p>The current skills cover the core PM workflow:</p>
+<ul>
+<li><strong><code>map-discovery</code></strong>: Structures raw research findings into patterns, distinguishes validated insights from assumptions, and flags evidence gaps before summary.</li>
+<li><strong><code>write-feature-request</code></strong>: Drafts a feature request with acceptance criteria, then verifies coverage across happy paths, edge cases, and failure states before output.</li>
+<li><strong><code>write-roadmap</code></strong>: Builds a roadmap narrative and checks each initiative against defined OKRs before returning it.</li>
+<li><strong><code>write-prd</code></strong>: Produces a full PRD with sections for problem, hypothesis, success metrics, and out-of-scope, and validates internal consistency.</li>
+<li><strong><code>write-user-stories</code></strong>: Breaks features into user stories in standard format, checks for missing context, and flags stories too large to estimate reliably.</li>
+<li><strong><code>write-release-notes</code></strong> and <strong><code>write-change-log</code></strong>: Generates user-facing and internal changelog entries calibrated to the audience.</li>
+</ul>
+<p>Each skill is a <code>SKILL.md</code> file. The format is open. Fork them, modify the gates, add your own, or contribute back to the repo.</p>
+<h2>What It Doesn&#39;t Do</h2>
+<p>Gambit won&#39;t write your strategy. It won&#39;t tell you what to build. It won&#39;t replace the judgment that comes from knowing your users, your market, and your constraints.</p>
+<p>What it will do is make sure that once you&#39;ve made a call, the artifact you generate to execute on it isn&#39;t quietly wrong in ways you&#39;ll only discover when it&#39;s expensive.</p>
+<p>That&#39;s a narrower promise than most AI tooling makes. I think it&#39;s a more honest one.</p>
+<h2>How to Get It</h2>
+<p><strong>Via Claude:</strong> Install from <a href="https://claude.com/plugins">claude.com/plugins</a> and search for Gambit. Once installed, the skills are available in any Claude conversation.</p>
+<p><strong>Via Gemini CLI:</strong> The library is indexed in the Antigravity/Gemini CLI extensions directory under <code>felipecabargasgambit</code>.</p>
+<p><strong>From source:</strong> The full library is at <a href="https://github.com/felipecabargas/gambit">github.com/felipecabargas/gambit</a>. Clone it, read the SKILL.md files, use them directly, or adapt them for your setup.</p>
+<h2>Why Open Source</h2>
+<p>Because the value in a PM skills library isn&#39;t in keeping it proprietary. It&#39;s in making it good enough that people actually use it and improve it.</p>
+<p>The quality gates I&#39;ve built reflect my failure modes. Someone else&#39;s will be different. The library gets better when more people are finding the holes.</p>
+<p>If you use it and something&#39;s wrong, open an issue. Or fork it and send a PR. The repo is there for both.</p>
+<hr>
+<p><em>Gambit is open source under MIT. The code is at <a href="https://github.com/felipecabargas/gambit">github.com/felipecabargas/gambit</a>. The Claude plugin is listed at <a href="https://claude.com/plugins">claude.com/plugins</a>.</em></p>
+
+    </div>
+
+    <hr class="article-divider">
+
+    <div class="share-label">Share this essay</div>
+    <div class="share-links">
+      <a class="share-btn share-linkedin" data-title="Introducing Gambit: PM Skills That Actually QA Themselves" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a class="share-btn share-x" data-title="Introducing Gambit: PM Skills That Actually QA Themselves" target="_blank" rel="noopener">Share on X</a>
+      <a class="share-btn" href="#" onclick="navigator.clipboard.writeText(location.href); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy link',2000); return false;">Copy link</a>
+    </div>
+
+    <div class="author-bio">
+      <div class="author-avatar" aria-hidden="true">FC</div>
+      <div class="author-info">
+        <div class="author-name">Felipe Cabargas</div>
+        <div class="author-desc">Product professional with 10+ years driving growth, compliance, and AI strategy. Based between Santiago and Copenhagen.</div>
+      </div>
+    </div>
+
+    <div class="consulting-cta">
+      <div class="cta-text">
+        <strong>Need a strategy, not just an opinion?</strong>
+        I work with startups on product, AI readiness, and governance.
+      </div>
+      <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Work with me ↗</a>
+    </div>
+  </article>
+  </div>
+  <div class="lang-content" data-lang="es" hidden>
+  <article class="article">
+    <header class="article-header">
+      <div class="article-eyebrow">
+        <span class="article-type type-essay">Ensayo</span>
+        <span class="article-date">26 de junio de 2026</span>
+        <span class="dot-sep">·</span>
+        <span class="article-readtime">5 min de lectura</span>
+      </div>
+      <h1 class="article-title">Presentando Gambit: Skills de PM que se Verifican Solas</h1>
+      <div class="article-topic-tags">
+        <span class="article-topic-tag">AI</span>
+        <span class="article-topic-tag">Product Management</span>
+        <span class="article-topic-tag">Open Source</span>
+      </div>
+    </header>
+
+    <div class="translation-notice">
+      Escrito originalmente en inglés. Traducción al español por IA.
+    </div>
+
+    <div class="article-body">
+      <p>Llevo suficiente tiempo usando IA en mi trabajo de PM como para saber cómo se ve el fallo.</p>
+<p>Te volvés más rápido. Los feature requests salen más limpios. Los resúmenes de discovery toman la mitad del tiempo. Y luego, tres sprints después, estás en una retro tratando de explicar por qué una funcionalidad que parecía sólida en papel se lanzó con los criterios de aceptación equivocados, o con un edge case que la investigación debería haber capturado, o resolviendo un problema que los usuarios nunca tuvieron.</p>
+<p>La IA no te mintió. Te dio un output plausible. No lo detectaste porque lo estabas revisando igual que revisarías el borrador de un colega, escaneando errores obvios sin interrogar el razonamiento detrás.</p>
+<p>Ese es el problema que Gambit intenta resolver.</p>
+<h2>Qué es Gambit</h2>
+<p><a href="https://github.com/felipecabargas/gambit">Gambit</a> es una librería open source de skills de PM para asistentes de IA. Workflows estructurados, quality gates incorporados, cubriendo las tareas más comunes de PM: feature requests, mapeo de discovery, roadmaps, PRDs, user stories, release notes.</p>
+<p>Está disponible como plugin en <a href="https://claude.com/plugins">el marketplace de Claude</a> e indexada en el directorio de extensiones Antigravity/Gemini CLI.</p>
+<p>Las skills no son prompts. Son workflows. Y la diferencia importa.</p>
+<p>Un prompt le pide al modelo que produzca algo. Una skill le pide al modelo que produzca algo y luego verifique si realmente debería haberlo hecho. Cada skill de Gambit tiene checkpoints incorporados, momentos donde el modelo valida su propio output contra un estándar antes de que llegue a tus manos.</p>
+<p>La skill de feature request no ensamblará un FR hasta confirmar que los criterios de aceptación cubren el happy path, los edge cases y los estados de fallo. La skill de roadmap no generará output hasta que cada iniciativa esté mapeada a un objetivo estratégico. La skill de discovery no simplemente resumirá lo que dijeron los usuarios. Marcará dónde la evidencia es débil y dónde un patrón puede ser una coincidencia.</p>
+<h2>Por Qué Importa</h2>
+<p>El consejo estándar para usar IA en el trabajo de PM es mejorar el prompting. Ser más específico. Agregar contexto. Dar ejemplos. Ese consejo es correcto. También es insuficiente.</p>
+<p>El problema no es el prompting. Es que los outputs de IA son epistémicamente inciertos. No podés saber de manera confiable si un output es correcto, incluso cuando parece correcto. Un feature request bien redactado con criterios de aceptación incorrectos se lee casi igual que uno con criterios correctos. La superficie es indistinguible.</p>
+<p>No podés hacer QA de un output de IA como hacés QA de un build. Un build funciona o no funciona. Un output de IA siempre es plausible, y plausible no es lo mismo que correcto.</p>
+<p>Gambit mueve el QA al workflow. Si el modelo tiene que pasar un quality gate antes de generar output, el fallo aparece antes y a menor costo. No siempre. Pero significativamente más seguido.</p>
+<p>La filosofía de fondo es simple: reducir la incertidumbre en el proceso para poder tolerar la incertidumbre en el resultado. Vas a lanzar artefactos generados por IA con información imperfecta. La pregunta es si lo hacés con o sin una verificación estructurada del trabajo.</p>
+<h2>Qué Hay en la Librería</h2>
+<p>Las skills actuales cubren el flujo de trabajo central de PM:</p>
+<ul>
+<li><strong><code>map-discovery</code></strong>: Estructura hallazgos de investigación en patrones, distingue insights validados de supuestos, y marca vacíos de evidencia antes del resumen.</li>
+<li><strong><code>write-feature-request</code></strong>: Redacta un feature request con criterios de aceptación, luego verifica cobertura en happy paths, edge cases y estados de fallo antes del output.</li>
+<li><strong><code>write-roadmap</code></strong>: Construye una narrativa de roadmap y verifica cada iniciativa contra OKRs definidos antes de devolverla.</li>
+<li><strong><code>write-prd</code></strong>: Produce un PRD completo con secciones para problema, hipótesis, métricas de éxito y fuera de alcance, y valida la consistencia interna.</li>
+<li><strong><code>write-user-stories</code></strong>: Desglosa funcionalidades en user stories en formato estándar, verifica si falta contexto, y marca historias demasiado grandes para estimar con confianza.</li>
+<li><strong><code>write-release-notes</code></strong> y <strong><code>write-change-log</code></strong>: Genera entradas de changelog para usuarios internos y externos, calibradas según la audiencia.</li>
+</ul>
+<p>Cada skill es un archivo <code>SKILL.md</code>. El formato es abierto. Podés hacer fork, modificar los gates, agregar los tuyos propios, o contribuir de vuelta al repo.</p>
+<h2>Lo Que No Hace</h2>
+<p>Gambit no va a escribir tu estrategia. No va a decirte qué construir. No va a reemplazar el juicio que viene de conocer a tus usuarios, tu mercado y tus restricciones.</p>
+<p>Lo que sí va a hacer es asegurarse de que, una vez que tomaste una decisión, el artefacto que generás para ejecutarla no esté silenciosamente equivocado de maneras que solo descubrís cuando es costoso.</p>
+<p>Esa es una promesa más estrecha que la que hace la mayoría de las herramientas de IA. Creo que es más honesta.</p>
+<h2>Cómo Obtenerlo</h2>
+<p><strong>Vía Claude:</strong> Instalá desde <a href="https://claude.com/plugins">claude.com/plugins</a> y buscá Gambit. Una vez instalado, las skills están disponibles en cualquier conversación de Claude.</p>
+<p><strong>Vía Gemini CLI:</strong> La librería está indexada en el directorio de extensiones Antigravity/Gemini CLI como <code>felipecabargasgambit</code>.</p>
+<p><strong>Desde el código:</strong> La librería completa está en <a href="https://github.com/felipecabargas/gambit">github.com/felipecabargas/gambit</a>. Cloná, leé los archivos SKILL.md, usalos directamente, o adaptalos para tu setup.</p>
+<h2>Por Qué Open Source</h2>
+<p>Porque el valor de una librería de skills de PM no está en mantenerla propietaria. Está en hacerla lo suficientemente buena como para que la gente la use y la mejore.</p>
+<p>Los quality gates que construí reflejan mis propios fallos. Los de otra persona van a ser distintos. La librería mejora cuando más personas encuentran los huecos.</p>
+<p>Si la usás y algo está mal, abrí un issue. O hacé fork y mandá un PR. El repo existe para las dos cosas.</p>
+<hr>
+<p><em>Gambit es open source bajo MIT. El código está en <a href="https://github.com/felipecabargas/gambit">github.com/felipecabargas/gambit</a>. El plugin de Claude está listado en <a href="https://claude.com/plugins">claude.com/plugins</a>.</em></p>
+
+    </div>
+
+    <hr class="article-divider">
+
+    <div class="share-label">Compartir este ensayo</div>
+    <div class="share-links">
+      <a class="share-btn share-linkedin" data-title="Presentando Gambit: Skills de PM que se Verifican Solas" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a class="share-btn share-x" data-title="Presentando Gambit: Skills de PM que se Verifican Solas" target="_blank" rel="noopener">Share on X</a>
+      <a class="share-btn" href="#" onclick="navigator.clipboard.writeText(location.href); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy link',2000); return false;">Copy link</a>
+    </div>
+
+    <div class="author-bio">
+      <div class="author-avatar" aria-hidden="true">FC</div>
+      <div class="author-info">
+        <div class="author-name">Felipe Cabargas</div>
+        <div class="author-desc">Profesional de producto con +10 años impulsando crecimiento, cumplimiento normativo y estrategia de IA. Entre Santiago y Copenhague.</div>
+      </div>
+    </div>
+
+    <div class="consulting-cta">
+      <div class="cta-text">
+        <strong>¿Necesitas estrategia, no solo opiniones?</strong>
+        Trabajo con startups en producto, preparación para IA y gobernanza.
+      </div>
+      <a class="cta-btn" href="https://cabargas.consulting" target="_blank" rel="noopener">Trabaja conmigo ↗</a>
+    </div>
+  </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span>© 2026 Felipe Cabargas</span>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/cabargas" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/felipecabargas" target="_blank" rel="noopener">GitHub</a>
+    <a href="/feed.xml">RSS</a>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var hasEs = true;
+    function detect() {
+      var param = new URLSearchParams(location.search).get('lang');
+      if (param === 'en' || param === 'es') return hasEs ? param : 'en';
+      if (hasEs && (navigator.language || '').toLowerCase().startsWith('es')) return 'es';
+      return 'en';
+    }
+    function apply(lang) {
+      document.querySelectorAll('.lang-content').forEach(function (el) {
+        el.hidden = el.dataset.lang !== lang;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      var url = new URL(location.href);
+      lang === 'en' ? url.searchParams.delete('lang') : url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+      document.documentElement.lang = lang;
+      var encoded = encodeURIComponent(location.href);
+      document.querySelectorAll('.share-linkedin').forEach(function (el) {
+        el.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encoded;
+      });
+      document.querySelectorAll('.share-x').forEach(function (el) {
+        el.href = 'https://x.com/intent/tweet?url=' + encoded + '&text=' + encodeURIComponent(el.dataset.title || '');
+      });
+    }
+    apply(detect());
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { apply(btn.dataset.lang); });
+    });
+  })();
+</script>
+
+</body>
+</html>

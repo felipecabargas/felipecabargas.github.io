@@ -6,7 +6,14 @@
     <description>Thinking out loud on product, AI, and what it means to build responsibly.</description>
     <atom:link href="https://cabargas.com/feed.xml" rel="self" type="application/rss+xml"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 May 2026 18:30:49 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2026 13:12:02 GMT</lastBuildDate>
+    <item>
+      <title>Introducing Gambit: PM Skills That Actually QA Themselves</title>
+      <link>https://cabargas.com/articles/introducing-gambit</link>
+      <description>I built an open-source library of PM skills for AI assistants. Not to make PMs faster, but to make AI outputs less likely to quietly fail them.</description>
+      <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://cabargas.com/articles/introducing-gambit</guid>
+    </item>
     <item>
       <title>Why I Joined the Chilean Chamber of Artificial Intelligence (and Why It Matters)</title>
       <link>https://cabargas.com/articles/camara-chilena-ia</link>
