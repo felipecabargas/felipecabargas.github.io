@@ -22,7 +22,7 @@ That's the problem Gambit is trying to fix.
 
 [Gambit](https://github.com/felipecabargas/gambit) is an open-source library of PM skills for AI assistants. Structured workflows, built-in quality gates, covering the most common PM tasks: feature requests, discovery mapping, roadmaps, PRDs, user stories, release notes.
 
-It's available as a plugin on [Claude's community marketplace](https://claude.com/plugins) and indexed in the Antigravity/Gemini CLI extensions directory.
+It's available as a plugin on [Claude's community marketplace](https://github.com/anthropics/claude-plugins-community) and indexed in the Antigravity/Gemini CLI extensions directory.
 
 The skills aren't prompts. They're workflows. And the difference matters.
 
@@ -65,7 +65,7 @@ That's a narrower promise than most AI tooling makes. I think it's a more honest
 
 ## How to Get It
 
-**Via Claude:** Install from [claude.com/plugins](https://claude.com/plugins) and search for Gambit. Once installed, the skills are available in any Claude conversation.
+**Via Claude:** Install from [Claude's community plugins](https://github.com/anthropics/claude-plugins-community) and search for Gambit. Once installed, the skills are available in any Claude conversation.
 
 **Via Gemini CLI:** The library is indexed in the Antigravity/Gemini CLI extensions directory under `felipecabargasgambit`.
 
@@ -81,4 +81,4 @@ If you use it and something's wrong, open an issue. Or fork it and send a PR. Th
 
 ---
 
-*Gambit is open source under MIT. The code is at [github.com/felipecabargas/gambit](https://github.com/felipecabargas/gambit). The Claude plugin is listed at [claude.com/plugins](https://claude.com/plugins).*
+*Gambit is open source under MIT. The code is at [github.com/felipecabargas/gambit](https://github.com/felipecabargas/gambit). The Claude plugin is listed at [Claude's community plugins](https://github.com/anthropics/claude-plugins-community).*

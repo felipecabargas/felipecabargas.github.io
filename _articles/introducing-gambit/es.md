@@ -19,7 +19,7 @@ Ese es el problema que Gambit intenta resolver.
 
 [Gambit](https://github.com/felipecabargas/gambit) es una librería open source de skills de PM para asistentes de IA. Workflows estructurados, quality gates incorporados, cubriendo las tareas más comunes de PM: feature requests, mapeo de discovery, roadmaps, PRDs, user stories, release notes.
 
-Está disponible como plugin en [el marketplace de Claude](https://claude.com/plugins) e indexada en el directorio de extensiones Antigravity/Gemini CLI.
+Está disponible como plugin en [el marketplace de Claude](https://github.com/anthropics/claude-plugins-community) e indexada en el directorio de extensiones Antigravity/Gemini CLI.
 
 Las skills no son prompts. Son workflows. Y la diferencia importa.
 
@@ -62,7 +62,7 @@ Esa es una promesa más estrecha que la que hace la mayoría de las herramientas
 
 ## Cómo Obtenerlo
 
-**Vía Claude:** Instalá desde [claude.com/plugins](https://claude.com/plugins) y buscá Gambit. Una vez instalado, las skills están disponibles en cualquier conversación de Claude.
+**Vía Claude:** Instalá desde [los plugins de la comunidad de Claude](https://github.com/anthropics/claude-plugins-community) y buscá Gambit. Una vez instalado, las skills están disponibles en cualquier conversación de Claude.
 
 **Vía Gemini CLI:** La librería está indexada en el directorio de extensiones Antigravity/Gemini CLI como `felipecabargasgambit`.
 
@@ -78,4 +78,4 @@ Si la usás y algo está mal, abrí un issue. O hacé fork y mandá un PR. El re
 
 ---
 
-*Gambit es open source bajo MIT. El código está en [github.com/felipecabargas/gambit](https://github.com/felipecabargas/gambit). El plugin de Claude está listado en [claude.com/plugins](https://claude.com/plugins).*
+*Gambit es open source bajo MIT. El código está en [github.com/felipecabargas/gambit](https://github.com/felipecabargas/gambit). El plugin de Claude está listado en [los plugins de la comunidad de Claude](https://github.com/anthropics/claude-plugins-community).*
