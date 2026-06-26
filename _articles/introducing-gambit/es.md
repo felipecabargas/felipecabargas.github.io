@@ -9,7 +9,7 @@ excerpt: "Construí una librería open source de skills de PM para asistentes de
 
 Llevo suficiente tiempo usando IA en mi trabajo de PM como para saber cómo se ve el fallo.
 
-Te volvés más rápido. Los feature requests salen más limpios. Los resúmenes de discovery toman la mitad del tiempo. Y luego, tres sprints después, estás en una retro tratando de explicar por qué una funcionalidad que parecía sólida en papel se lanzó con los criterios de aceptación equivocados, o con un edge case que la investigación debería haber capturado, o resolviendo un problema que los usuarios nunca tuvieron.
+Te vuelves más rápido. Los feature requests salen más limpios. Los resúmenes de discovery toman la mitad del tiempo. Y luego, tres sprints después, estás en una retro tratando de explicar por qué una funcionalidad que parecía sólida en papel se lanzó con los criterios de aceptación equivocados, o con un edge case que la investigación debería haber capturado, o resolviendo un problema que los usuarios nunca tuvieron.
 
 La IA no te mintió. Te dio un output plausible. No lo detectaste porque lo estabas revisando igual que revisarías el borrador de un colega, escaneando errores obvios sin interrogar el razonamiento detrás.
 
@@ -31,13 +31,13 @@ La skill de feature request no ensamblará un FR hasta confirmar que los criteri
 
 El consejo estándar para usar IA en el trabajo de PM es mejorar el prompting. Ser más específico. Agregar contexto. Dar ejemplos. Ese consejo es correcto. También es insuficiente.
 
-El problema no es el prompting. Es que los outputs de IA son epistémicamente inciertos. No podés saber de manera confiable si un output es correcto, incluso cuando parece correcto. Un feature request bien redactado con criterios de aceptación incorrectos se lee casi igual que uno con criterios correctos. La superficie es indistinguible.
+El problema no es el prompting. Es que los outputs de IA son epistémicamente inciertos. No puedes saber de manera confiable si un output es correcto, incluso cuando parece correcto. Un feature request bien redactado con criterios de aceptación incorrectos se lee casi igual que uno con criterios correctos. La superficie es indistinguible.
 
-No podés hacer QA de un output de IA como hacés QA de un build. Un build funciona o no funciona. Un output de IA siempre es plausible, y plausible no es lo mismo que correcto.
+No puedes hacer QA de un output de IA como haces QA de un build. Un build funciona o no funciona. Un output de IA siempre es plausible, y plausible no es lo mismo que correcto.
 
 Gambit mueve el QA al workflow. Si el modelo tiene que pasar un quality gate antes de generar output, el fallo aparece antes y a menor costo. No siempre. Pero significativamente más seguido.
 
-La filosofía de fondo es simple: reducir la incertidumbre en el proceso para poder tolerar la incertidumbre en el resultado. Vas a lanzar artefactos generados por IA con información imperfecta. La pregunta es si lo hacés con o sin una verificación estructurada del trabajo.
+La filosofía de fondo es simple: reducir la incertidumbre en el proceso para poder tolerar la incertidumbre en el resultado. Vas a lanzar artefactos generados por IA con información imperfecta. La pregunta es si lo haces con o sin una verificación estructurada del trabajo.
 
 ## Qué Hay en la Librería
 
@@ -50,7 +50,7 @@ Las skills actuales cubren el flujo de trabajo central de PM:
 - **`write-user-stories`**: Desglosa funcionalidades en user stories en formato estándar, verifica si falta contexto, y marca historias demasiado grandes para estimar con confianza.
 - **`write-release-notes`** y **`write-change-log`**: Genera entradas de changelog para usuarios internos y externos, calibradas según la audiencia.
 
-Cada skill es un archivo `SKILL.md`. El formato es abierto. Podés hacer fork, modificar los gates, agregar los tuyos propios, o contribuir de vuelta al repo.
+Cada skill es un archivo `SKILL.md`. El formato es abierto. Puedes hacer fork, modificar los gates, agregar los tuyos propios, o contribuir de vuelta al repo.
 
 ## Lo Que No Hace
 
@@ -62,11 +62,11 @@ Esa es una promesa más estrecha que la que hace la mayoría de las herramientas
 
 ## Cómo Obtenerlo
 
-**Vía Claude:** Instalá desde [los plugins de la comunidad de Claude](https://github.com/anthropics/claude-plugins-community) y buscá Gambit. Una vez instalado, las skills están disponibles en cualquier conversación de Claude.
+**Vía Claude:** Instala desde [los plugins de la comunidad de Claude](https://github.com/anthropics/claude-plugins-community) y busca Gambit. Una vez instalado, las skills están disponibles en cualquier conversación de Claude.
 
 **Vía Gemini CLI:** La librería está indexada en el directorio de extensiones Antigravity/Gemini CLI como `felipecabargasgambit`.
 
-**Desde el código:** La librería completa está en [github.com/felipecabargas/gambit](https://github.com/felipecabargas/gambit). Cloná, leé los archivos SKILL.md, usalos directamente, o adaptalos para tu setup.
+**Desde el código:** La librería completa está en [github.com/felipecabargas/gambit](https://github.com/felipecabargas/gambit). Clona, lee los archivos SKILL.md, úsalos directamente, o adáptalos para tu setup.
 
 ## Por Qué Open Source
 
@@ -74,7 +74,7 @@ Porque el valor de una librería de skills de PM no está en mantenerla propieta
 
 Los quality gates que construí reflejan mis propios fallos. Los de otra persona van a ser distintos. La librería mejora cuando más personas encuentran los huecos.
 
-Si la usás y algo está mal, abrí un issue. O hacé fork y mandá un PR. El repo existe para las dos cosas.
+Si la usas y algo está mal, abre un issue. O haz fork y manda un PR. El repo existe para las dos cosas.
 
 ---
 
