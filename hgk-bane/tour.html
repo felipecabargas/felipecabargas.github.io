@@ -36,6 +36,7 @@
   line-height: 1.6;
 }
 .hgk-bane *, .hgk-bane *::before, .hgk-bane *::after { box-sizing: border-box; }
+.hgk-bane [hidden] { display: none !important; }   /* host pages may not reset it, and classes like .bn-pin set display */
 .hgk-bane a { color: inherit; }
 .hgk-bane button, .hgk-bane .bn-btn {
   font: 600 13px/1 var(--bn-data); letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
