@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>try { if (sessionStorage.getItem("hgk-bane") !== "a9c63091e782a427318a14b8390a66bec6ba0943972637bfef804f5f4efea47a") location.replace("./"); } catch (e) { location.replace("./"); }</script>
+<title>Kom ud og kør | Holbæk Gokart</title>
+<style>body{margin:0;background:#0c0c0e}</style>
+</head>
+<body>
+<!-- Holbæk Gokart: 3D track tour for the club homepage. Self-contained fragment: drop it into any page
+     (or use index.html as an iframe). data-src is the folder holding world.json and ortho.jpg. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Faster+One&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap">
+<style>
+/* Layout: a full-width 3D stage with the invitation laid over its left edge, story card bottom-left,
+   camera switch top-right, lap strip along the bottom; "get started" steps underneath. */
+.hgk-bane {
+  --bn-bg: #0c0c0e;
+  --bn-panel: #17171a;
+  --bn-rule: #2e2e33;
+  --bn-fg: #f4f4f5;
+  --bn-muted: #a1a1aa;
+  --bn-red: #ef4444;
+  --bn-hud: #fffb00;
+  --bn-display: "Faster One", "Arial Black", Impact, sans-serif;
+  --bn-body: "Merriweather", Georgia, "Times New Roman", serif;
+  --bn-data: "Chakra Petch", "Eurostile", "Arial Narrow", system-ui, sans-serif;
+  color-scheme: dark;
+  background: var(--bn-bg);
+  color: var(--bn-fg);
+  font-family: var(--bn-body);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.hgk-bane *, .hgk-bane *::before, .hgk-bane *::after { box-sizing: border-box; }
+.hgk-bane a { color: inherit; }
+.hgk-bane button, .hgk-bane .bn-btn {
+  font: 600 13px/1 var(--bn-data); letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
+  color: var(--bn-fg); background: rgb(12 12 14 / .7); border: 1px solid rgb(255 255 255 / .2);
+  border-radius: 999px; padding: 10px 16px; cursor: pointer; backdrop-filter: blur(8px); display: inline-flex; align-items: center; gap: 8px;
+}
+.hgk-bane button:hover, .hgk-bane .bn-btn:hover { border-color: var(--bn-fg); }
+.hgk-bane :focus-visible { outline: 2px solid var(--bn-hud); outline-offset: 2px; }
+
+/* ----- hero: invitation + stage ----- */
+.hgk-bane .bn-hero { display: grid; }
+.hgk-bane .bn-hero > * { grid-area: 1 / 1; }
+.hgk-bane .bn-stage { position: relative; height: clamp(560px, 82vh, 860px); overflow: hidden; background: #1b2a1c url() center / cover; touch-action: pan-y; }
+.hgk-bane .bn-stage canvas { display: block; width: 100%; height: 100%; }
+.hgk-bane .bn-intro {
+  position: relative; z-index: 2; align-self: start; pointer-events: none;
+  padding-block: 40px 120px;
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: 24px;
+  max-width: 620px;
+}
+.hgk-bane .bn-stage::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgb(12 12 14 / .9) 0%, rgb(12 12 14 / .7) 26%, rgb(12 12 14 / 0) 52%);
+}
+.hgk-bane .bn-intro > * { pointer-events: auto; }
+.hgk-bane .bn-intro, .hgk-bane .bn-stage::after { transition: opacity .5s, transform .5s; }
+.hgk-bane.is-riding .bn-stage::after { opacity: 0; }
+@media (min-width: 901px) {
+  .hgk-bane.is-riding .bn-intro { opacity: 0; transform: translateY(-10px); }
+  .hgk-bane.is-riding .bn-intro > * { pointer-events: none; }
+}
+.hgk-bane .bn-eyebrow { margin: 0; font: 600 13px/1.3 var(--bn-data); letter-spacing: .14em; text-transform: uppercase; color: var(--bn-muted); }
+.hgk-bane h2 { margin: 6px 0 0; font: 400 clamp(44px, 7.5vw, 84px)/1 var(--bn-display); text-wrap: balance; }
+.hgk-bane .bn-lead { margin: 14px 0 0; max-width: 46ch; font-weight: 300; font-size: 16px; color: #e4e4e7; }
+.hgk-bane .bn-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.hgk-bane .bn-cta .bn-primary { background: var(--bn-red); border-color: var(--bn-red); color: #fff; }
+.hgk-bane .bn-cta .bn-primary:hover { background: #dc2626; border-color: #dc2626; }
+
+.hgk-bane .bn-views {
+  position: absolute; z-index: 3; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: rgb(12 12 14 / .7); backdrop-filter: blur(8px);
+}
+.hgk-bane .bn-views button { border-color: transparent; background: transparent; padding: 9px 14px; backdrop-filter: none; }
+.hgk-bane .bn-views button[aria-pressed="true"] { background: var(--bn-fg); color: var(--bn-bg); }
+
+.hgk-bane .bn-pins { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hgk-bane .bn-pin {
+  position: absolute; left: 0; top: 0; pointer-events: auto; transform: translate(-50%, -100%);
+  padding: 0; border: 0; background: none; backdrop-filter: none; display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.hgk-bane .bn-pin b {
+  display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--bn-bg); color: var(--bn-fg); border: 2px solid var(--bn-fg); font: 700 14px/1 var(--bn-data);
+  box-shadow: 0 2px 8px rgb(0 0 0 / .5); transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+.hgk-bane .bn-pin span {
+  margin-top: 4px; padding: 4px 8px; border-radius: 6px; background: rgb(12 12 14 / .78); white-space: nowrap;
+  font: 600 12px/1 var(--bn-data); letter-spacing: .04em; text-transform: none;
+}
+.hgk-bane .bn-pin::after { content: ""; width: 2px; height: 14px; background: var(--bn-fg); order: -0; }
+.hgk-bane .bn-pin.is-active b { background: var(--bn-red); border-color: var(--bn-red); color: #fff; transform: scale(1.12); }
+.hgk-bane .bn-pins.is-close .bn-pin span { display: none; }
+.hgk-bane .bn-pin:hover b { border-color: var(--bn-red); }
+
+.hgk-bane .bn-card {
+  position: absolute; z-index: 3; left: max(16px, env(safe-area-inset-left, 0px)); bottom: 64px;
+  width: min(400px, calc(100% - 32px)); padding: 18px 20px 20px; border-radius: 16px;
+  background: rgb(12 12 14 / .84); backdrop-filter: blur(10px); border: 1px solid rgb(255 255 255 / .1);
+}
+.hgk-bane .bn-card small { font: 600 12px/1 var(--bn-data); letter-spacing: .14em; text-transform: uppercase; color: var(--bn-red); }
+.hgk-bane .bn-card h3 { margin: 6px 0 6px; font: 700 22px/1.2 var(--bn-data); text-wrap: balance; }
+.hgk-bane .bn-card p { margin: 0; font-weight: 300; font-size: 15px; color: #e4e4e7; }
+.hgk-bane .bn-card.is-new { animation: bn-in .45s ease-out; }
+@keyframes bn-in { from { opacity: .35; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.hgk-bane .bn-speed {
+  position: absolute; z-index: 3; right: max(16px, env(safe-area-inset-right, 0px)); bottom: 64px;
+  font: 700 44px/1 var(--bn-data); color: var(--bn-hud); text-shadow: 0 2px 10px rgb(0 0 0 / .6); font-variant-numeric: tabular-nums;
+}
+.hgk-bane .bn-speed small { font-size: 15px; color: var(--bn-fg); margin-left: 4px; }
+
+.hgk-bane .bn-bar {
+  position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 14px;
+  padding-block: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: linear-gradient(0deg, rgb(12 12 14 / .85), rgb(12 12 14 / 0));
+}
+.hgk-bane .bn-track { position: relative; flex: 1; height: 28px; cursor: pointer; }
+.hgk-bane .bn-track::before { content: ""; position: absolute; left: 0; right: 0; top: 13px; height: 2px; background: rgb(255 255 255 / .3); border-radius: 1px; }
+.hgk-bane .bn-fill { position: absolute; left: 0; top: 13px; height: 2px; background: var(--bn-fg); border-radius: 1px; }
+.hgk-bane .bn-tick { position: absolute; top: 7px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--bn-bg); border: 2px solid var(--bn-fg); font-size: 0; }
+.hgk-bane .bn-tick.is-past { background: var(--bn-fg); }
+.hgk-bane .bn-kart { position: absolute; top: 6px; width: 16px; height: 16px; margin-left: -8px; border-radius: 4px; background: var(--bn-red); box-shadow: 0 0 0 3px rgb(239 68 68 / .3); }
+.hgk-bane .bn-hint { font: 500 12px/1.3 var(--bn-data); color: var(--bn-muted); white-space: nowrap; }
+
+/* ----- get started ----- */
+.hgk-bane .bn-start {
+  max-width: 1240px; margin: 0 auto; display: grid; gap: 22px;
+  padding-block: 48px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.hgk-bane .bn-start h3 { margin: 0; font: 700 clamp(24px, 3.4vw, 32px)/1.15 var(--bn-data); text-wrap: balance; }
+.hgk-bane .bn-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: step; }
+.hgk-bane .bn-steps li { counter-increment: step; display: grid; gap: 8px; align-content: start; padding: 20px; border-radius: 16px; background: var(--bn-panel); border: 1px solid var(--bn-rule); }
+.hgk-bane .bn-steps li::before { content: counter(step); font: 400 34px/1 var(--bn-display); color: var(--bn-red); }
+.hgk-bane .bn-steps h4 { margin: 0; font: 700 19px/1.2 var(--bn-data); }
+.hgk-bane .bn-steps .bn-price { font: 600 15px/1.2 var(--bn-data); color: var(--bn-hud); }
+.hgk-bane .bn-steps p { margin: 0; font-weight: 300; color: #d4d4d8; }
+.hgk-bane .bn-contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding-top: 22px; border-top: 1px solid var(--bn-rule); }
+.hgk-bane .bn-contact p { margin: 0; max-width: 62ch; }
+.hgk-bane .bn-contact strong { font: 700 18px/1 var(--bn-data); letter-spacing: .04em; user-select: all; white-space: nowrap; }
+.hgk-bane .bn-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.hgk-bane .bn-links .bn-btn { background: transparent; }
+.hgk-bane .bn-note { margin: 0; font-size: 12px; color: var(--bn-muted); font-weight: 300; }
+.hgk-bane .bn-error { position: absolute; inset: auto 16px 16px; z-index: 4; font-family: var(--bn-data); color: var(--bn-fg); background: rgb(12 12 14 / .85); padding: 12px 14px; border-radius: 10px; }
+
+@media (max-width: 900px) {
+  .hgk-bane .bn-hero { display: block; }
+  .hgk-bane .bn-intro { background: none; padding-block: 32px 20px; padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); max-width: none; }
+  .hgk-bane .bn-stage { height: min(74vh, 640px); min-height: 460px; }
+  .hgk-bane .bn-stage::after { background: linear-gradient(0deg, rgb(12 12 14 / .75) 0%, rgb(12 12 14 / 0) 40%); }
+  .hgk-bane .bn-steps { grid-template-columns: minmax(0, 1fr); }
+  .hgk-bane .bn-hint { display: none; }
+}
+@media (max-width: 560px) {
+  .hgk-bane .bn-views { left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); justify-content: space-between; }
+  .hgk-bane .bn-views button { padding: 9px 10px; font-size: 12px; letter-spacing: .03em; }
+  .hgk-bane .bn-card { bottom: 56px; padding: 14px 16px 16px; }
+  .hgk-bane .bn-card h3 { font-size: 19px; }
+  .hgk-bane .bn-card p { font-size: 14px; }
+  .hgk-bane .bn-speed { top: 66px; bottom: auto; font-size: 34px; }
+  .hgk-bane .bn-pin span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hgk-bane * { animation: none !important; transition: none !important; } }
+</style>
+
+<section class="hgk-bane" data-src="." aria-labelledby="hgk-bane-title">
+  <div class="bn-hero">
+    <div class="bn-intro">
+      <p class="bn-eyebrow">Holbæk Gokartklub · Omfartsvejen 27</p>
+      <h2 id="hgk-bane-title">Kom ud og kør</h2>
+      <p class="bn-lead">Tag en tur rundt på vores bane og se, hvad der venter dig. Alle fra 6 år kan være med, og første gang er en prøvetræning.</p>
+      <div class="bn-cta">
+        <a class="bn-btn bn-primary" id="hgk-bane-cta" href="https://holbaek-gokart.dk/priser">Book en prøvetræning</a>
+        <a class="bn-btn" id="hgk-bane-times" href="https://holbaek-gokart.dk/tider">Se træningstider</a>
+      </div>
+    </div>
+    <div class="bn-stage" id="hgk-bane-stage">
+      <div class="bn-pins" id="hgk-bane-pins"></div>
+      <div class="bn-views" role="group" aria-label="Kameravinkel">
+        <button type="button" data-view="overview" aria-pressed="true">Oversigt</button>
+        <button type="button" data-view="follow" aria-pressed="false">Følg karten</button>
+        <button type="button" data-view="driver" aria-pressed="false">Førersæde</button>
+      </div>
+      <article class="bn-card" id="hgk-bane-card" aria-live="polite">
+        <small id="hgk-bane-card-n">Stop 1 af 6</small>
+        <h3 id="hgk-bane-card-title">Her starter det</h3>
+        <p id="hgk-bane-card-text">Lige ved klubhuset ligger start og mål.</p>
+      </article>
+      <div class="bn-speed" id="hgk-bane-speed" hidden><span id="hgk-bane-kmh">0</span><small>km/t</small></div>
+      <div class="bn-bar">
+        <button type="button" id="hgk-bane-play" aria-label="Pause">Pause</button>
+        <div class="bn-track" id="hgk-bane-track" role="slider" tabindex="0" aria-label="Hvor på banen" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="bn-fill" id="hgk-bane-fill"></div>
+          <div class="bn-kart" id="hgk-bane-kart"></div>
+        </div>
+        <span class="bn-hint">Træk for at dreje · Ctrl/⌘ + scroll for at zoome</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bn-start">
+    <h3>Sådan kommer du i gang</h3>
+    <ol class="bn-steps" id="hgk-bane-steps"></ol>
+    <div class="bn-contact">
+      <p>Spørgsmål? Send en sms til <span id="hgk-bane-who">cheftræner Søren</span> på <strong id="hgk-bane-sms">50 47 54 94</strong>, så bliver du ringet op.</p>
+      <div class="bn-links">
+        <a class="bn-btn" id="hgk-bane-guide" href="https://holbaek-gokart.dk/guide">Guide til indmeldelse</a>
+        <a class="bn-btn" id="hgk-bane-join" href="https://3778.foreninglet.dk/memberportal/frontpage">Meld dig ind</a>
+      </div>
+    </div>
+    <p class="bn-note">Banen er bygget ud fra en rigtig omgang kørt med GPS. Luftfoto og terræn: Klimadatastyrelsen, GeoDanmark og Danmarks Højdemodel. Der tages forbehold for prisændringer.</p>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(() => {
+  const root = document.querySelector(".hgk-bane");
+  const $ = (id) => document.getElementById("hgk-bane-" + id);
+  const base = (root.dataset.src || ".").replace(/\/$/, "");
+  const stage = $("stage");
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  stage.style.backgroundImage = `url("${base}/ortho.jpg")`;
+
+  fetch(base + "/world.json").then((r) => {
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  }).then(start).catch((e) => {
+    console.error(e);
+    const p = document.createElement("p");
+    p.className = "bn-error";
+    p.textContent = "3D-banen kunne ikke indlæses. Prøv at genindlæse siden.";
+    stage.appendChild(p);
+  });
+
+  function fillContent(W) {
+    const L = W.links, C = W.contact;
+    $("cta").href = L.prices; $("times").href = L.times; $("guide").href = L.guide; $("join").href = L.join;
+    $("who").textContent = `${C.role} ${C.name}`;
+    $("sms").textContent = C.sms;
+    $("steps").innerHTML = "";
+    for (const s of W.steps) {
+      const li = document.createElement("li");
+      li.innerHTML = "<h4></h4><span class=\"bn-price\"></span><p></p>";
+      li.querySelector("h4").textContent = s.title;
+      li.querySelector(".bn-price").textContent = s.price;
+      li.querySelector("p").textContent = s.text;
+      $("steps").appendChild(li);
+    }
+  }
+
+  // A rental-style club kart, about 1.9 m long, built from primitives. Local +Z is forward, +X is the kart's left.
+  function buildKart(T3) {
+    const std = (color, roughness, metalness = 0) => new T3.MeshStandardMaterial({ color: new T3.Color(color).convertSRGBToLinear(), roughness, metalness });
+    const M = {
+      paint: std("#e0312f", 0.32, 0.1), white: std("#f4f4f5", 0.4), chrome: std("#dde1e7", 0.25, 0.65),
+      plastic: std("#1b1b1e", 0.5), seat: std("#121214", 0.28), rubber: std("#141416", 0.9),
+      rim: std("#cfd4dc", 0.3, 0.55), engine: std("#45484f", 0.45, 0.35), suit: std("#202024", 0.85),
+      neon: std("#e6f20d", 0.6), glove: std("#0f0f10", 0.7), visor: std("#0b0f16", 0.06, 0.4),
+    };
+    const kart = new T3.Group();
+    const add = (mesh, parent = kart) => { parent.add(mesh); return mesh; };
+    const V3 = (p) => new T3.Vector3(p[0], p[1], p[2]);
+    const tube = (pts, r, m, parent) =>
+      add(new T3.Mesh(new T3.TubeGeometry(new T3.CatmullRomCurve3(pts.map(V3), false, "catmullrom", 0.15), pts.length * 10, r, 8, false), m), parent);
+    // a rounded slab: rounded rectangle (or any outline) in the XZ plane, h tall, sitting on y
+    const slab = (outline, h, bevel, m, y = 0, parent) => {
+      const s = new T3.Shape(outline.map(([x, z]) => new T3.Vector2(x, -z)));
+      const g = new T3.ExtrudeGeometry(s, { depth: Math.max(0.001, h - 2 * bevel), bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 3, curveSegments: 8 });
+      g.rotateX(-Math.PI / 2);
+      g.translate(0, y + bevel, 0);
+      return add(new T3.Mesh(g, m), parent);
+    };
+    const rrect = (w, d, r, cx = 0, cz = 0) => {
+      const pts = [], seg = 5;
+      for (const [sx, sz, a0] of [[1, 1, 0], [-1, 1, Math.PI / 2], [-1, -1, Math.PI], [1, -1, Math.PI * 1.5]]) {
+        for (let i = 0; i <= seg; i++) {
+          const a = a0 + (i / seg) * Math.PI / 2;
+          pts.push([cx + sx * (w / 2 - r) + r * Math.cos(a), cz + sz * (d / 2 - r) + r * Math.sin(a)]);
+        }
+      }
+      return pts;
+    };
+
+    // chassis: chrome tube frame, floor tray, axle
+    for (const s of [1, -1]) tube([[0.24 * s, 0.1, 0.8], [0.26 * s, 0.1, 0.42], [0.31 * s, 0.1, -0.2], [0.35 * s, 0.1, -0.64]], 0.017, M.chrome);
+    tube([[-0.24, 0.1, 0.8], [0.24, 0.1, 0.8]], 0.017, M.chrome);
+    tube([[-0.35, 0.1, -0.64], [0.35, 0.1, -0.64]], 0.017, M.chrome);
+    tube([[-0.29, 0.1, -0.08], [0.29, 0.1, -0.08]], 0.015, M.chrome);
+    slab(rrect(0.5, 0.95, 0.06, 0, 0.3), 0.012, 0, M.plastic, 0.085);
+    const axle = add(new T3.Mesh(new T3.CylinderGeometry(0.02, 0.02, 1.2, 10), M.chrome));
+    axle.rotation.z = Math.PI / 2; axle.position.set(0, 0.14, -0.52);
+
+    // bodywork: nose, number board, side pods, rear bumper
+    slab([[-0.44, 0.66], [0.44, 0.66], [0.5, 0.88], [0.42, 1.0], [-0.42, 1.0], [-0.5, 0.88]], 0.17, 0.035, M.paint, 0.06);
+    slab([[-0.2, 0.84], [0.2, 0.84], [0.22, 0.92], [-0.22, 0.92]], 0.02, 0.008, M.white, 0.23);
+    for (const s of [1, -1]) {
+      slab(rrect(0.17, 0.66, 0.07, 0.62 * s, 0.0), 0.15, 0.035, M.paint, 0.09);
+      slab(rrect(0.175, 0.3, 0.05, 0.62 * s, -0.05), 0.02, 0, M.white, 0.245);
+      tube([[0.3 * s, 0.1, 0.34], [0.55 * s, 0.13, 0.3]], 0.015, M.chrome);
+      tube([[0.33 * s, 0.1, -0.3], [0.55 * s, 0.13, -0.3]], 0.015, M.chrome);
+    }
+    slab(rrect(1.36, 0.14, 0.06, 0, -0.84), 0.15, 0.03, M.plastic, 0.12);
+    for (const s of [1, -1]) tube([[0.3 * s, 0.1, -0.64], [0.4 * s, 0.17, -0.78]], 0.016, M.chrome);
+    const nb = document.createElement("canvas"); nb.width = 256; nb.height = 160;
+    const nx = nb.getContext("2d");
+    nx.fillStyle = "#f4f4f5"; nx.fillRect(0, 0, 256, 160);
+    nx.fillStyle = "#e0312f"; nx.font = '400 96px "Faster One", Impact, sans-serif'; nx.textAlign = "center"; nx.textBaseline = "middle";
+    nx.fillText("HGK", 128, 84);
+    const boardTex = new T3.CanvasTexture(nb); boardTex.encoding = T3.sRGBEncoding;
+    const board = add(new T3.Mesh(new T3.PlaneGeometry(0.4, 0.25), new T3.MeshStandardMaterial({ map: boardTex, roughness: 0.4 })));
+    board.position.set(0, 0.36, 0.62); board.rotation.x = -0.75;
+    const boardBack = add(new T3.Mesh(new T3.BoxGeometry(0.42, 0.27, 0.015), M.paint));
+    boardBack.position.set(0, 0.355, 0.612); boardBack.rotation.x = -0.75;
+
+    // seat
+    slab(rrect(0.4, 0.36, 0.1, 0, -0.3), 0.06, 0.02, M.seat, 0.11);
+    const back = slab(rrect(0.42, 0.06, 0.03, 0, 0), 0.46, 0.02, M.seat, 0);
+    back.position.set(0, 0.14, -0.5); back.rotation.x = -0.33;
+
+    // engine with fins, exhaust and chain guard on the right-hand rear
+    const eng = add(new T3.Mesh(new T3.BoxGeometry(0.2, 0.22, 0.26), M.engine)); eng.position.set(-0.36, 0.25, -0.45);
+    for (let i = 0; i < 5; i++) {
+      const fin = add(new T3.Mesh(new T3.BoxGeometry(0.24, 0.012, 0.2), M.engine)); fin.position.set(-0.36, 0.38 + i * 0.022, -0.45);
+    }
+    const tank = add(new T3.Mesh(new T3.CylinderGeometry(0.08, 0.08, 0.16, 16), M.plastic)); tank.position.set(-0.2, 0.3, -0.62); tank.rotation.z = Math.PI / 2;
+    tube([[-0.46, 0.3, -0.42], [-0.56, 0.28, -0.52], [-0.54, 0.24, -0.7]], 0.022, M.chrome);
+    const muffler = add(new T3.Mesh(new T3.CylinderGeometry(0.05, 0.05, 0.22, 14), M.plastic)); muffler.position.set(-0.53, 0.24, -0.76); muffler.rotation.x = Math.PI / 2;
+    const guard = add(new T3.Mesh(new T3.BoxGeometry(0.03, 0.12, 0.3), M.plastic)); guard.position.set(-0.47, 0.16, -0.5);
+
+    // wheels: rounded tyre (lathe), alloy rim with five spokes; front ones on a steering pivot
+    const wheels = [], fronts = [];
+    const wheel = (x, z, r, w) => {
+      const pivot = new T3.Group(); pivot.position.set(x, r, z); kart.add(pivot);
+      const spin = new T3.Group(); pivot.add(spin);
+      const prof = [[r - 0.055, -w / 2], [r - 0.018, -w / 2], [r, -w / 2 + 0.025], [r, w / 2 - 0.025], [r - 0.018, w / 2], [r - 0.055, w / 2]]
+        .map(([a, b]) => new T3.Vector2(a, b));
+      const tg = new T3.LatheGeometry(prof, 28); tg.rotateZ(Math.PI / 2);
+      add(new T3.Mesh(tg, M.rubber), spin);
+      const rg = new T3.CylinderGeometry(r - 0.055, r - 0.055, w * 0.9, 24); rg.rotateZ(Math.PI / 2);
+      add(new T3.Mesh(rg, M.rim), spin);
+      const face = Math.sign(x) * (w * 0.46);
+      for (let i = 0; i < 5; i++) {
+        const sp = add(new T3.Mesh(new T3.BoxGeometry(0.012, 0.022, r - 0.07), M.rim), spin);
+        const a = (i / 5) * Math.PI * 2;
+        sp.position.set(face, Math.sin(a) * (r - 0.07) / 2, Math.cos(a) * (r - 0.07) / 2);
+        sp.rotation.x = -a;
+      }
+      const hub = add(new T3.Mesh(new T3.CylinderGeometry(0.028, 0.028, w * 0.95, 12), M.engine), spin); hub.rotation.z = Math.PI / 2;
+      wheels.push({ spin, r });
+      return pivot;
+    };
+    for (const s of [1, -1]) {
+      fronts.push(wheel(0.52 * s, 0.52, 0.132, 0.13));
+      wheel(0.6 * s, -0.52, 0.14, 0.2);
+    }
+
+    // steering column and three-spoke wheel; the wheel's normal runs up the column towards the driver
+    tube([[0, 0.12, 0.62], [0, 0.44, 0.2]], 0.014, M.chrome);
+    const swMount = new T3.Group(); swMount.position.set(0, 0.455, 0.18); swMount.rotation.x = 0.65; kart.add(swMount);
+    const sw = new T3.Group(); swMount.add(sw);
+    add(new T3.Mesh(new T3.TorusGeometry(0.14, 0.019, 10, 36), M.plastic), sw);
+    add(new T3.Mesh(new T3.CylinderGeometry(0.035, 0.035, 0.03, 16).rotateX(Math.PI / 2), M.engine), sw);
+    for (const a of [-Math.PI / 2, Math.PI / 6 + Math.PI, -Math.PI / 6]) {   // bottom, left, right spokes
+      const sp = add(new T3.Mesh(new T3.BoxGeometry(0.11, 0.022, 0.012), M.engine), sw);
+      sp.position.set(Math.cos(a) * 0.08, Math.sin(a) * 0.08, 0); sp.rotation.z = a;
+    }
+    const grips = [new T3.Object3D(), new T3.Object3D()];
+    grips[0].position.set(0.125, 0.06, 0.02); grips[1].position.set(-0.125, 0.06, 0.02);
+    grips.forEach((g) => sw.add(g));
+    for (const g of grips) add(new T3.Mesh(new T3.SphereGeometry(0.042, 12, 10), M.glove), g);
+
+    // driver: legs to the pedals, torso, arms that follow the steering wheel, helmet
+    const driver = new T3.Group(); kart.add(driver);
+    for (const s of [1, -1]) {
+      tube([[0.1 * s, 0.2, -0.22], [0.12 * s, 0.33, 0.18], [0.1 * s, 0.2, 0.6]], 0.062, M.suit, driver);
+      const shoe = add(new T3.Mesh(new T3.BoxGeometry(0.09, 0.07, 0.17), M.glove), driver); shoe.position.set(0.1 * s, 0.2, 0.66);
+    }
+    const tp = [[0, 0], [0.15, 0], [0.175, 0.1], [0.185, 0.24], [0.17, 0.36], [0.11, 0.43], [0.0, 0.45]].map(([a, b]) => new T3.Vector2(a, b));
+    const torso = add(new T3.Mesh(new T3.LatheGeometry(tp, 24), M.suit), driver);
+    torso.scale.set(1, 1, 0.72); torso.position.set(0, 0.16, -0.34); torso.rotation.x = -0.28;
+    const band = add(new T3.Mesh(new T3.CylinderGeometry(0.188, 0.188, 0.05, 24, 1, true), M.neon), driver);
+    band.scale.set(1, 1, 0.72); band.position.set(0, 0.42, -0.41); band.rotation.x = -0.28;
+    const neck = add(new T3.Mesh(new T3.CylinderGeometry(0.05, 0.06, 0.08, 12), M.suit), driver); neck.position.set(0, 0.62, -0.46);
+    const head = new T3.Group(); head.position.set(0, 0.74, -0.46); driver.add(head);
+    const shell = add(new T3.Mesh(new T3.SphereGeometry(0.15, 28, 20), M.white), head); shell.scale.set(1, 1.04, 1.08);
+    const visor = add(new T3.Mesh(new T3.SphereGeometry(0.153, 24, 10, Math.PI / 2 - 0.85, 1.7, 1.08, 0.48), M.visor), head);
+    visor.scale.set(1, 1.04, 1.08);
+    const stripe = add(new T3.Mesh(new T3.TorusGeometry(0.152, 0.02, 8, 28, Math.PI), M.paint), head);
+    stripe.rotation.y = Math.PI / 2; stripe.scale.set(1.08, 1.04, 1);
+    const shoulders = [new T3.Vector3(0.18, 0.55, -0.43), new T3.Vector3(-0.18, 0.55, -0.43)];
+    const limbGeo = new T3.CylinderGeometry(0.045, 0.05, 1, 10); limbGeo.translate(0, 0.5, 0);
+    const arms = shoulders.map(() => [add(new T3.Mesh(limbGeo, M.suit), driver), add(new T3.Mesh(limbGeo, M.suit), driver)]);
+    for (const s of shoulders) { const sh = add(new T3.Mesh(new T3.SphereGeometry(0.06, 12, 10), M.suit), driver); sh.position.copy(s); }
+    const UP = new T3.Vector3(0, 1, 0), tmp = new T3.Vector3(), hand = new T3.Vector3(), elbow = new T3.Vector3();
+    const limb = (m, a, b) => {
+      tmp.subVectors(b, a); const len = tmp.length();
+      m.position.copy(a); m.quaternion.setFromUnitVectors(UP, tmp.divideScalar(len)); m.scale.set(1, len, 1);
+    };
+    const UPPER = 0.3, FORE = 0.3;
+    function poseArms() {
+      kart.updateMatrixWorld(true);
+      shoulders.forEach((s, i) => {
+        grips[i].getWorldPosition(hand); kart.worldToLocal(hand);
+        const d = Math.min(s.distanceTo(hand), UPPER + FORE - 0.01);
+        const mid = s.clone().lerp(hand, 0.5);
+        const out = Math.sqrt(Math.max(0, UPPER * UPPER - (d / 2) ** 2));
+        elbow.copy(mid).add(new T3.Vector3(Math.sign(s.x) * out * 0.8, -out * 0.6, 0));
+        limb(arms[i][0], s, elbow); limb(arms[i][1], elbow, hand);
+      });
+    }
+
+    kart.traverse((o) => { if (o.isMesh) { o.castShadow = true; } });
+    let steer = 0;
+    return {
+      kart, head, eye: new T3.Vector3(0, 0.84, -0.5),
+      update(dt, speedMs, steerTarget, snap) {
+        steer = snap ? steerTarget : steer + (steerTarget - steer) * (1 - Math.exp(-dt * 8));
+        for (const w of wheels) w.spin.rotation.x += (speedMs / w.r) * dt;
+        for (const f of fronts) f.rotation.y = steer;
+        sw.rotation.z = -steer * 2.2;
+        poseArms();
+        return steer;
+      },
+    };
+  }
+
+  function start(W) {
+    fillContent(W);
+    if (!window.THREE || !(() => { try { return !!document.createElement("canvas").getContext("webgl"); } catch (e) { return false; } })()) {
+      throw new Error("no WebGL");
+    }
+    const T3 = THREE;
+    const V = (x, y, z) => new T3.Vector3(x, z, -y);   // local metres (east, north, up) -> three (x, up, south)
+
+    // ----- renderer, scene, light -----
+    const renderer = new T3.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = T3.PCFSoftShadowMap;
+    renderer.outputEncoding = T3.sRGBEncoding;
+    stage.prepend(renderer.domElement);
+    renderer.domElement.setAttribute("aria-label", "3D-model af Holbæk Gokarts bane med en kart, der kører en omgang");
+    renderer.domElement.setAttribute("role", "img");
+
+    const SKY = new T3.Color("#bcd6e8");
+    const scene = new T3.Scene();
+    scene.background = SKY;
+    scene.fog = new T3.Fog(SKY, 300, 900);
+    scene.add(new T3.HemisphereLight("#fffdf7", "#8d8a72", 0.66));
+    const sun = new T3.DirectionalLight("#fff6e6", 0.62);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(1024, 1024);
+    Object.assign(sun.shadow.camera, { left: -7, right: 7, top: 7, bottom: -7, near: 1, far: 80 });
+    sun.shadow.bias = -0.0008;
+    scene.add(sun, sun.target);
+
+    const camera = new T3.PerspectiveCamera(50, 1, 0.05, 2000);
+
+    // soft sky reflections for the kart's paint and chrome
+    const envScene = new T3.Scene();
+    const envGeo = new T3.SphereGeometry(10, 32, 16), envCol = [];
+    for (let i = 0; i < envGeo.attributes.position.count; i++) {
+      const y = envGeo.attributes.position.getY(i) / 10;
+      const c = y > 0 ? new T3.Color("#f4f8fb").lerp(new T3.Color("#8fb6d6"), Math.min(1, y * 1.6)) : new T3.Color("#7a8566").lerp(new T3.Color("#3c4231"), Math.min(1, -y * 2));
+      envCol.push(c.r, c.g, c.b);
+    }
+    envGeo.setAttribute("color", new T3.Float32BufferAttribute(envCol, 3));
+    envScene.add(new T3.Mesh(envGeo, new T3.MeshBasicMaterial({ vertexColors: true, side: T3.BackSide })));
+    const pmrem = new T3.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(envScene, 0.02).texture;
+
+    // ----- terrain from the height grids, draped with the aerial photos -----
+    function terrain(G, url, ease) {
+      const raw = atob(G.cm), bytes = new Uint8Array(raw.length);
+      for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+      const cm = new Uint16Array(bytes.buffer);
+      const gw = (G.cols - 1) * G.step, gh = (G.rows - 1) * G.step;
+      const geo = new T3.PlaneGeometry(gw, gh, G.cols - 1, G.rows - 1);
+      geo.rotateX(-Math.PI / 2);
+      const pos = geo.attributes.position;
+      for (let i = 0; i < pos.count; i++) pos.setY(i, ease(i, G.base + cm[i] / 100));
+      geo.computeVertexNormals();
+      const tex = new T3.TextureLoader().load(url, () => { stage.style.backgroundImage = "none"; });
+      tex.encoding = T3.sRGBEncoding;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      const mesh = new T3.Mesh(geo, new T3.MeshLambertMaterial({ map: tex }));
+      mesh.position.set(G.x0 + gw / 2, 0, -(G.y0 - gh / 2));
+      mesh.receiveShadow = true;
+      scene.add(mesh);
+      return mesh;
+    }
+    const G = W.heights;
+    let fieldY;
+    if (W.surround) {
+      // the landscape around the club; the track patch is already blended into it at build time
+      fieldY = W.surround.field_y;
+      terrain(W.surround.heights, base + "/surround.jpg", (i, y) => y);
+      terrain(G, base + "/ortho.jpg", (i, y) => y);
+    } else {
+      // ease the terrain down to the surrounding field level over the feathered border, so there is no step
+      const featherCells = W.edge_feather_m / G.step;
+      fieldY = G.base;   // the grid's lowest point, so the field never rises over the circuit
+      terrain(G, base + "/ortho.jpg", (i, y) => {
+        const r = Math.floor(i / G.cols), c = i % G.cols;
+        let f = Math.min(1, Math.min(r, c, G.rows - 1 - r, G.cols - 1 - c) / featherCells);
+        f = f * f * (3 - 2 * f);
+        return fieldY + (y - fieldY) * f;
+      });
+    }
+    const gcx = G.x0 + (G.cols - 1) * G.step / 2, gcz = -(G.y0 - (G.rows - 1) * G.step / 2);
+    const field = new T3.Mesh(new T3.PlaneGeometry(4000, 4000), new T3.MeshLambertMaterial({ color: new T3.Color(W.field).convertSRGBToLinear() }));
+    field.rotateX(-Math.PI / 2);
+    field.position.set(gcx, fieldY - 0.05, gcz);
+    scene.add(field);
+
+    // ----- tyre stacks, floodlights, start gantry -----
+    const tyreGeo = new T3.CylinderGeometry(0.29, 0.29, 0.31, 12);   // two tyres high
+    const tyres = new T3.InstancedMesh(tyreGeo, new T3.MeshLambertMaterial({ color: new T3.Color("#141416").convertSRGBToLinear() }), W.tyres.length);
+    const m4 = new T3.Matrix4(), q = new T3.Quaternion(), one = new T3.Vector3(1, 1, 1);
+    W.tyres.forEach(([x, y, z], i) => { m4.compose(V(x, y, z + 0.155), q, one); tyres.setMatrixAt(i, m4); });
+    scene.add(tyres);
+
+    const metal = new T3.MeshLambertMaterial({ color: new T3.Color("#c9ccd1").convertSRGBToLinear() });
+    const poles = new T3.InstancedMesh(new T3.CylinderGeometry(0.07, 0.11, 1, 8), metal, W.lamps.length);
+    const nHeads = W.lamps.reduce((a, l) => a + l.heads.length, 0);
+    const heads = new T3.InstancedMesh(new T3.BoxGeometry(0.55, 0.22, 0.4), new T3.MeshLambertMaterial({ color: new T3.Color("#e9eaec").convertSRGBToLinear() }), nHeads);
+    let hi = 0;
+    W.lamps.forEach((l, i) => {
+      m4.compose(V(l.x, l.y, l.z + l.h / 2), q, new T3.Vector3(1, l.h, 1)); poles.setMatrixAt(i, m4);
+      for (const [hx, hy] of l.heads) { m4.compose(V(hx, hy, l.z + l.h), q, one); heads.setMatrixAt(hi++, m4); }
+    });
+    scene.add(poles, heads);
+
+    const g = W.gantry;
+    const gl = V(g.left[0], g.left[1], g.z), gr = V(g.right[0], g.right[1], g.z);
+    const span = gl.distanceTo(gr), top = g.bottom + g.height;
+    for (const p of [gl, gr]) {
+      const post = new T3.Mesh(new T3.CylinderGeometry(0.12, 0.12, top, 10), metal);
+      post.position.copy(p).add(new T3.Vector3(0, top / 2, 0));
+      scene.add(post);
+    }
+    const bc = document.createElement("canvas"); bc.width = 1024; bc.height = Math.round(1024 * g.height / span);
+    const bx = bc.getContext("2d");
+    bx.fillStyle = "#111"; bx.fillRect(0, 0, bc.width, bc.height);
+    bx.fillStyle = "#ef4444"; bx.fillRect(0, bc.height - 10, bc.width, 10);
+    bx.fillStyle = "#fff"; bx.font = `400 ${Math.round(bc.height * 0.62)}px "Faster One", Impact, sans-serif`;
+    bx.textAlign = "center"; bx.textBaseline = "middle"; bx.fillText("HOLBÆK GOKART", bc.width / 2, bc.height / 2);
+    const bannerTex = new T3.CanvasTexture(bc); bannerTex.encoding = T3.sRGBEncoding;
+    const banner = new T3.Mesh(new T3.PlaneGeometry(span, g.height), new T3.MeshBasicMaterial({ map: bannerTex, side: T3.DoubleSide }));
+    banner.position.copy(gl).lerp(gr, 0.5).add(new T3.Vector3(0, g.bottom + g.height / 2, 0));
+    banner.rotation.y = -Math.atan2(gr.z - gl.z, gr.x - gl.x);
+    scene.add(banner);
+    document.fonts && document.fonts.ready.then(() => {
+      bx.fillStyle = "#111"; bx.fillRect(0, 0, bc.width, bc.height - 10);
+      bx.fillStyle = "#fff"; bx.fillText("HOLBÆK GOKART", bc.width / 2, bc.height / 2);
+      bannerTex.needsUpdate = true;
+    });
+
+    // ----- clubhouse and neighbours, from their map footprints -----
+    const lin = (c) => new T3.Color(c).convertSRGBToLinear();
+    function paint(w, h, draw) {
+      const c = document.createElement("canvas"); c.width = Math.round(w); c.height = Math.round(h);
+      draw(c.getContext("2d"), c.width, c.height);
+      const t = new T3.CanvasTexture(c); t.encoding = T3.sRGBEncoding;
+      t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      return t;
+    }
+    const PPM = 56;   // texture pixels per metre on walls
+    function brick(x, w, h) {   // Danish red brick in running bond
+      x.fillStyle = "#d9cfc2"; x.fillRect(0, 0, w, h);   // mortar
+      const bw = 0.24 * PPM, bh = 0.075 * PPM;
+      for (let r = 0, y = h; y > -bh; r++, y -= bh) {
+        for (let i = -1, bx0 = (r % 2) * bw / 2; bx0 + i * bw < w; i++) {
+          const v = Math.abs(Math.sin(r * 12.9 + i * 78.2) * 43758.5) % 1;
+          x.fillStyle = `hsl(${9 + v * 6}, ${46 + v * 10}%, ${36 + v * 7}%)`;
+          x.fillRect(bx0 + i * bw + 1, y - bh + 1, bw - 1.5, bh - 1.5);
+        }
+      }
+    }
+    function window_(x, px, py, w, h, panes) {   // white frame, mullions, sky-tinted glass; py is the sill
+      const f = 0.07 * PPM;
+      x.fillStyle = "#fbfbf8"; x.fillRect(px, py - h, w, h);
+      const pw = (w - f) / panes;
+      for (let i = 0; i < panes; i++) {
+        const g = x.createLinearGradient(0, py - h, 0, py);
+        g.addColorStop(0, "#9fb4c4"); g.addColorStop(0.45, "#3a4752"); g.addColorStop(1, "#2a333b");
+        x.fillStyle = g; x.fillRect(px + f + i * pw, py - h + f, pw - f, h - 2 * f);
+      }
+    }
+    // a wall face: brick, and windows at [from, width, sill, height, panes] in metres; `sunk` is buried in the ground
+    const wallTex = (len, ht, sunk, wins) => paint(len * PPM, ht * PPM, (x, w, h) => {
+      brick(x, w, h);
+      for (const [a, ww, sill, wh, panes] of wins) window_(x, a * PPM, h - (sunk + sill) * PPM, ww * PPM, wh * PPM, panes);
+    });
+    function hipRoof(A, B, e, r, gable) {   // eave rectangle ±A × ±B at height e, ridge at r along x
+      const R = gable ? A : A - B;
+      const v = [
+        -A, e, B, A, e, B, R, r, 0, -A, e, B, R, r, 0, -R, r, 0,       // front slope
+        A, e, -B, -A, e, -B, -R, r, 0, A, e, -B, -R, r, 0, R, r, 0,    // back slope
+        A, e, B, A, e, -B, R, r, 0, -A, e, -B, -A, e, B, -R, r, 0,     // hips, or gable ends
+      ];
+      const geo = new T3.BufferGeometry();
+      geo.setAttribute("position", new T3.Float32BufferAttribute(v, 3));
+      geo.setAttribute("uv", new T3.Float32BufferAttribute(v.flatMap((_, i) => i % 3 === 0 ? [v[i] / 2, v[i + 2] / 2 + v[i + 1]] : []), 2));
+      geo.computeVertexNormals();
+      return geo;
+    }
+    const tiles = paint(256, 256, (x, w, h) => {   // dark concrete roof tiles
+      x.fillStyle = "#3a3b3d"; x.fillRect(0, 0, w, h);
+      for (let r = 0; r < 8; r++) {
+        x.fillStyle = "#26272a"; x.fillRect(0, r * 32 + 27, w, 5);
+        for (let i = 0; i < 8; i++) { x.fillStyle = "rgba(0,0,0,.25)"; x.fillRect(i * 32 + (r % 2) * 16, r * 32, 2, 32); }
+      }
+    });
+    tiles.wrapS = tiles.wrapT = T3.RepeatWrapping;
+    const white = new T3.MeshLambertMaterial({ color: lin("#f4f4f0") });
+    function box(grp, w, h, d, x, y, z, mat) {
+      const m = new T3.Mesh(new T3.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); grp.add(m); return m;
+    }
+
+    function building(b) {
+      const grp = new T3.Group();
+      grp.position.copy(V(b.x, b.y, b.z));
+      grp.rotation.y = b.heading;   // local x along the building, +z towards the front (the track side)
+      const L = b.length, D = b.width, sunk = b.sunk || 0.5, H = b.eave + sunk;
+      if (b.style === "clubhouse") {
+        // track side: tall white glazing in bays, as on the terrace; plainer windows elsewhere
+        const front = [], back = [];
+        for (let a = 1.2; a + 3.4 < L - 1; a += 4.6) front.push([a, 3.4, 0.05, 2.25, 4]);
+        for (let a = 2.5; a + 1.4 < L - 1; a += 6.5) back.push([a, 1.4, 1.0, 1.1, 2]);
+        const mats = [wallTex(D, H, sunk, [[D / 2 - 0.7, 1.4, 1.0, 1.1, 2]]), wallTex(D, H, sunk, [[D / 2 - 0.7, 1.4, 1.0, 1.1, 2]]),
+          white, white, wallTex(L, H, sunk, front), wallTex(L, H, sunk, back)].map((t) => t.isTexture ? new T3.MeshLambertMaterial({ map: t }) : t);
+        box(grp, L, H, D, 0, H / 2 - sunk, 0, mats);
+        const o = 0.45;
+        const roof = new T3.Mesh(hipRoof(L / 2 + o, D / 2 + o, b.eave, b.ridge), new T3.MeshLambertMaterial({ map: tiles, side: T3.DoubleSide }));
+        grp.add(roof);
+        for (const s of [1, -1]) {   // white fascia boards and gutters
+          box(grp, L + 2 * o, 0.22, 0.06, 0, b.eave - 0.08, s * (D / 2 + o), white);
+          box(grp, 0.06, 0.22, D + 2 * o, s * (L / 2 + o), b.eave - 0.08, 0, white);
+        }
+        if (b.canopy) {   // the covered terrace: a low lean-to on white posts
+          const c = b.canopy, lo = 2.4, hi = b.eave - 0.12;
+          const slope = Math.hypot(c, hi - lo), pitch = Math.atan2(hi - lo, c);
+          const deckGeo = new T3.PlaneGeometry(L, slope);
+          deckGeo.attributes.uv.array.forEach((v, i, a) => { a[i] = v * (i % 2 ? slope / 2 : L / 2); });   // tiles at the main roof's scale
+          const deck = new T3.Mesh(deckGeo, new T3.MeshLambertMaterial({ map: tiles, side: T3.DoubleSide }));
+          deck.rotation.x = -Math.PI / 2 + pitch;
+          deck.position.set(0, (lo + hi) / 2, D / 2 + c / 2);
+          grp.add(deck);
+          box(grp, L, 0.24, 0.06, 0, lo - 0.06, D / 2 + c, white);
+          const n = Math.round(L / 4.6);
+          for (let i = 0; i <= n; i++) box(grp, 0.14, lo + sunk, 0.14, -L / 2 + 0.2 + i * (L - 0.4) / n, (lo - sunk) / 2, D / 2 + c - 0.1, white);
+        }
+      } else if (b.style === "tent") {
+        const canvas = paint(L * 24, H * 24, (x, w, h) => {
+          x.fillStyle = "#f6f5f0"; x.fillRect(0, 0, w, h);
+          x.strokeStyle = "#d8d8d2"; x.lineWidth = 3;
+          for (let a = 0; a < w; a += 3 * 24) { x.beginPath(); x.moveTo(a, 0); x.lineTo(a, h); x.stroke(); }
+          x.fillStyle = "#dfe5ea";
+          for (let a = 0.6 * 24; a + 1.6 * 24 < w; a += 3 * 24) x.fillRect(a + 6, h - (sunk + 2.0) * 24, 1.6 * 24, 1.1 * 24);
+        });
+        box(grp, L, H, D, 0, H / 2 - sunk, 0, new T3.MeshLambertMaterial({ map: canvas }));
+        const roof = new T3.Mesh(hipRoof(L / 2 + 0.05, D / 2 + 0.05, b.eave, b.ridge, true), new T3.MeshLambertMaterial({ color: lin("#fbfbf7"), side: T3.DoubleSide }));
+        grp.add(roof);   // a gable roof closes its own end triangles
+      } else {
+        box(grp, L, H, D, 0, H / 2 - sunk, 0, new T3.MeshLambertMaterial({ color: lin("#6f7468") }));
+        box(grp, L + 0.3, 0.12, D + 0.3, 0, b.eave + 0.06, 0, new T3.MeshLambertMaterial({ color: lin("#4a4c4e") }));
+      }
+      grp.traverse((m) => { if (m.isMesh) { m.castShadow = false; m.receiveShadow = true; } });
+      scene.add(grp);
+    }
+    (W.buildings || []).forEach(building);
+
+    // ----- fences: club banners round the boundary, a tube railing at the terrace -----
+    const steel = new T3.MeshLambertMaterial({ color: lin("#9aa0a6") });
+    const lineMid = { x: Ln0("x"), y: Ln0("y") };
+    function Ln0(k) { const a = W.line[k]; return a.reduce((s, v) => s + v, 0) / a.length; }
+    const bannerDesigns = [   // alternate the club's logo with an invitation
+      (x, w, h, logo) => {
+        x.fillStyle = "#fff"; x.fillRect(0, 0, w, h);
+        if (logo) { const lh = h * 0.92, lw = lh * logo.width / logo.height; x.drawImage(logo, w * 0.04, (h - lh) / 2, lw, lh); }
+        x.fillStyle = "#111"; x.textAlign = "left"; x.textBaseline = "middle";
+        x.font = `400 ${h * 0.3}px "Faster One", Impact, sans-serif`; x.fillText("HOLBÆK", w * 0.43, h * 0.33);
+        x.fillStyle = "#dc2626"; x.fillText("GOKART KLUB", w * 0.43, h * 0.68);
+      },
+      (x, w, h) => {
+        x.fillStyle = "#dc2626"; x.fillRect(0, 0, w, h);
+        x.fillStyle = "#fff"; x.textAlign = "center"; x.textBaseline = "middle";
+        x.font = `400 ${h * 0.36}px "Faster One", Impact, sans-serif`; x.fillText("BLIV MEDLEM", w / 2, h * 0.4);
+        x.font = `700 ${h * 0.17}px "Chakra Petch", "Arial Narrow", sans-serif`; x.fillText("HOLBAEK-GOKART.DK · FRA 6 ÅR", w / 2, h * 0.76);
+      },
+    ];
+    const PANEL = 2.6, PH = 0.8, PB = 0.25, POST = 1.25;
+    const fencePanels = [], railSegs = [];
+    for (const f of W.fences || []) {
+      // resample to whole panels per leg
+      for (let k = 0; k + 1 < f.points.length; k++) {
+        const [x0, y0, z0] = f.points[k], [x1, y1, z1] = f.points[k + 1];
+        const len = Math.hypot(x1 - x0, y1 - y0);
+        if (f.kind === "rail") { railSegs.push([x0, y0, z0, x1, y1, z1, len]); continue; }
+        const n = Math.max(1, Math.round(len / PANEL));
+        for (let i = 0; i < n; i++) {
+          const a = i / n, b = (i + 1) / n;
+          fencePanels.push([x0 + (x1 - x0) * a, y0 + (y1 - y0) * a, z0 + (z1 - z0) * a, x0 + (x1 - x0) * b, y0 + (y1 - y0) * b, z0 + (z1 - z0) * b]);
+        }
+      }
+    }
+    if (fencePanels.length) {
+      const faces = bannerDesigns.map((d) => {
+        const t = paint(1024, 1024 * PH / PANEL, (x, w, h) => d(x, w, h, null));
+        return { tex: t, mesh: new T3.InstancedMesh(new T3.PlaneGeometry(1, 1), new T3.MeshLambertMaterial({ map: t }), Math.ceil(fencePanels.length / 2)), n: 0 };
+      });
+      // the banner's back: a one-sided plane facing out, so it is never drawn over the print (no depth fighting)
+      const backs = new T3.InstancedMesh(new T3.PlaneGeometry(1, 1), new T3.MeshLambertMaterial({ color: lin("#2c2f33") }), fencePanels.length);
+      const flip = new T3.Quaternion();
+      const posts = new T3.InstancedMesh(new T3.CylinderGeometry(0.035, 0.035, 1, 6), steel, fencePanels.length + W.fences.length);
+      let pi = 0;
+      fencePanels.forEach(([x0, y0, z0, x1, y1, z1], i) => {
+        const dx = x1 - x0, dy = y1 - y0, len = Math.hypot(dx, dy);
+        // face the track: the panel's front normal (right of its local x) must point at the circuit's middle
+        let th = Math.atan2(dy, dx);
+        const mx = (x0 + x1) / 2, my = (y0 + y1) / 2, mz = Math.min(z0, z1);
+        if ((dy / len) * (lineMid.x - mx) - (dx / len) * (lineMid.y - my) < 0) th += Math.PI;
+        q.setFromAxisAngle(new T3.Vector3(0, 1, 0), th);
+        const c = V(mx, my, mz + PB + PH / 2);
+        flip.setFromAxisAngle(new T3.Vector3(0, 1, 0), th + Math.PI);
+        m4.compose(c, flip, new T3.Vector3(len - 0.04, PH, 1)); backs.setMatrixAt(i, m4);
+        const F = faces[i % 2];
+        m4.compose(c, q, new T3.Vector3(len - 0.04, PH, 1));
+        F.mesh.setMatrixAt(F.n++, m4);
+        m4.compose(V(x0, y0, z0 + POST / 2 - 0.2), new T3.Quaternion(), new T3.Vector3(1, POST + 0.2, 1)); posts.setMatrixAt(pi++, m4);
+      });
+      q.identity();
+      for (const f of W.fences) if (f.kind !== "rail") {
+        const [x, y, z] = f.points[f.points.length - 1];
+        m4.compose(V(x, y, z + POST / 2 - 0.2), q, new T3.Vector3(1, POST + 0.2, 1)); posts.setMatrixAt(pi++, m4);
+      }
+      posts.count = pi;
+      for (const F of faces) { F.mesh.count = F.n; scene.add(F.mesh); }
+      scene.add(backs, posts);
+      // r128 culls instanced meshes by the unit geometry at the origin, not by where the instances are
+      for (const m of [backs, posts, ...faces.map((F) => F.mesh)]) m.frustumCulled = false;
+      // redraw with the logo and the web fonts once they are in
+      const logo = new Image();
+      logo.onload = () => (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => faces.forEach((F, k) => {
+        const cv = F.tex.image; bannerDesigns[k](cv.getContext("2d"), cv.width, cv.height, logo); F.tex.needsUpdate = true;
+      }));
+      logo.src = base + "/logo.png";
+    }
+    for (const [x0, y0, z0, x1, y1, z1, len] of railSegs) {   // two tubes on posts every 2 m
+      const a = V(x0, y0, z0), b = V(x1, y1, z1), dir = b.clone().sub(a).normalize();
+      const rq = new T3.Quaternion().setFromUnitVectors(new T3.Vector3(0, 1, 0), dir);
+      for (const hgt of [1.05, 0.55]) {
+        const tube = new T3.Mesh(new T3.CylinderGeometry(0.025, 0.025, a.distanceTo(b), 6), steel);
+        tube.quaternion.copy(rq); tube.position.copy(a).lerp(b, 0.5).add(new T3.Vector3(0, hgt, 0)); scene.add(tube);
+      }
+      const n = Math.round(len / 2), rp = new T3.InstancedMesh(new T3.CylinderGeometry(0.03, 0.03, 1.25, 6), steel, n + 1);
+      for (let i = 0; i <= n; i++) { m4.compose(a.clone().lerp(b, i / n).add(new T3.Vector3(0, 0.45, 0)), new T3.Quaternion(), one); rp.setMatrixAt(i, m4); }
+      rp.frustumCulled = false;
+      scene.add(rp);
+    }
+
+    // ----- the driven line -----
+    const Ln = W.line, n = Ln.x.length, hz = Ln.hz, T = (n - 1) / hz;
+    const sm = (a) => a.map((_, i) => {   // light smoothing of 10 Hz GPS jitter
+      let s = 0, c = 0;
+      for (let k = -2; k <= 2; k++) { const j = i + k; if (j >= 0 && j < n) { s += a[j]; c++; } }
+      return s / c;
+    });
+    const sx = sm(Ln.x), sy = sm(Ln.y);
+    const P = sx.map((x, i) => V(x, sy[i], Ln.z[i]));
+    const lineGeo = new T3.BufferGeometry().setFromPoints(P.map((p) => p.clone().add(new T3.Vector3(0, 0.08, 0))));
+    scene.add(new T3.Line(lineGeo, new T3.LineBasicMaterial({ color: "#fffb00", transparent: true, opacity: 0.45 })));
+
+    // start/finish chequers across the line
+    const cc = document.createElement("canvas"); cc.width = 256; cc.height = 32;
+    const cx2 = cc.getContext("2d");
+    for (let i = 0; i < 16; i++) for (let j = 0; j < 2; j++) { cx2.fillStyle = (i + j) % 2 ? "#111" : "#f4f4f5"; cx2.fillRect(i * 16, j * 16, 16, 16); }
+    const chequer = new T3.Mesh(new T3.PlaneGeometry(7.5, 0.9), new T3.MeshLambertMaterial({ map: new T3.CanvasTexture(cc), transparent: true, opacity: 0.92 }));
+    chequer.rotateX(-Math.PI / 2);
+    const d0 = new T3.Vector3().subVectors(P[4], P[0]);
+    chequer.rotation.z = Math.atan2(-d0.z, d0.x) - Math.PI / 2;   // across the direction of travel
+    chequer.position.copy(P[0]).add(new T3.Vector3(0, 0.06, 0));
+    scene.add(chequer);
+
+    // ----- the kart -----
+    const K = buildKart(T3), kart = K.kart;
+    scene.add(kart);
+    // a red beacon over the kart so it can be found from the overview
+    const bcv = document.createElement("canvas"); bcv.width = bcv.height = 64;
+    const bctx = bcv.getContext("2d");
+    bctx.fillStyle = "rgba(239,68,68,.35)"; bctx.beginPath(); bctx.arc(32, 32, 30, 0, 7); bctx.fill();
+    bctx.fillStyle = "#ef4444"; bctx.strokeStyle = "#fff"; bctx.lineWidth = 5; bctx.beginPath(); bctx.arc(32, 32, 15, 0, 7); bctx.fill(); bctx.stroke();
+    const beacon = new T3.Sprite(new T3.SpriteMaterial({ map: new T3.CanvasTexture(bcv), depthTest: false, sizeAttenuation: false }));
+    beacon.scale.set(0.045, 0.045, 1); beacon.renderOrder = 10;
+    scene.add(beacon);
+
+    // ----- motion along the lap -----
+    const sampleAt = (t) => {
+      const f = Math.min(n - 1.001, Math.max(0, t * hz)), i = Math.floor(f), k = f - i;
+      return { i, k, p: P[i].clone().lerp(P[i + 1], k), v: Ln.v[i] + (Ln.v[i + 1] - Ln.v[i]) * k, d: Ln.d[i] + (Ln.d[i + 1] - Ln.d[i]) * k };
+    };
+    const idxAtDist = (d) => { let i = 0; while (i < n - 1 && Ln.d[i] < d) i++; return i; };
+    const pointAhead = (d, ahead) => P[idxAtDist((d + ahead) % Ln.length_m)];
+    const heading = new T3.Vector3(0, 0, 1);
+
+    // ----- story stops -----
+    const stops = W.stops.map((s, k) => ({ ...s, k, t: idxAtDist(s.d) / hz }));
+    const pins = stops.map((s) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "bn-pin";
+      b.innerHTML = `<b>${s.k + 1}</b><span></span>`;
+      b.querySelector("span").textContent = s.title;
+      b.setAttribute("aria-label", `Stop ${s.k + 1}: ${s.title}`);
+      b.addEventListener("click", () => jumpTo(Math.max(0, s.t - 1.2), true));
+      $("pins").appendChild(b);
+      s.anchor = P[idxAtDist(s.d)].clone().add(new T3.Vector3(0, 3.2, 0));
+      return b;
+    });
+    const ticks = stops.map((s) => {
+      const t = document.createElement("div");
+      t.className = "bn-tick"; t.style.left = (s.d / Ln.length_m * 100) + "%";
+      $("track").insertBefore(t, $("fill"));
+      return t;
+    });
+    let shownStop = -1;
+    function showStop(k) {
+      if (k === shownStop) return;
+      shownStop = k;
+      const s = stops[k], card = $("card");
+      $("card-n").textContent = `Stop ${k + 1} af ${stops.length}`;
+      $("card-title").textContent = s.title;
+      $("card-text").textContent = s.text;
+      card.classList.remove("is-new"); void card.offsetWidth; card.classList.add("is-new");
+      pins.forEach((p, j) => p.classList.toggle("is-active", j === k));
+    }
+
+    // ----- cameras -----
+    const controls = new T3.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.minDistance = 25; controls.maxDistance = 260;
+    controls.maxPolarAngle = 1.32;
+    // never trap the page: wheel scrolls the page and one finger scrolls on phones; zoom with pinch or Ctrl/⌘ + scroll
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    renderer.domElement.style.touchAction = "pan-y";
+    renderer.domElement.addEventListener("wheel", (ev) => {
+      if (!(ev.ctrlKey || ev.metaKey) || view !== "overview") return;
+      ev.preventDefault();
+      const off = camera.position.clone().sub(controls.target);
+      const len = Math.min(controls.maxDistance, Math.max(controls.minDistance, off.length() * Math.exp(ev.deltaY * 0.004)));
+      camera.position.copy(controls.target).add(off.setLength(len));
+      controls.autoRotate = false;
+    }, { passive: false });
+    let pinch = null;
+    renderer.domElement.addEventListener("touchstart", (ev) => {
+      if (ev.touches.length === 2) pinch = Math.hypot(ev.touches[0].clientX - ev.touches[1].clientX, ev.touches[0].clientY - ev.touches[1].clientY);
+    }, { passive: true });
+    renderer.domElement.addEventListener("touchmove", (ev) => {
+      if (ev.touches.length !== 2 || !pinch || view !== "overview") return;
+      ev.preventDefault();
+      const d = Math.hypot(ev.touches[0].clientX - ev.touches[1].clientX, ev.touches[0].clientY - ev.touches[1].clientY);
+      const off = camera.position.clone().sub(controls.target);
+      off.setLength(Math.min(controls.maxDistance, Math.max(controls.minDistance, off.length() * pinch / d)));
+      camera.position.copy(controls.target).add(off);
+      pinch = d;
+    }, { passive: false });
+    controls.autoRotate = !reduceMotion; controls.autoRotateSpeed = 0.35;
+    const centre = V((W.extent[0] + W.extent[2]) / 2, (W.extent[1] + W.extent[3]) / 2, G.base);
+    controls.target.copy(centre);
+    // desktop starts close enough that the edges of the photo fall outside the frame
+    camera.position.copy(centre).add(new T3.Vector3(-70, 66, 86).multiplyScalar(stage.clientWidth < 600 ? 1.9 : 1));
+    let idleTimer;
+    controls.addEventListener("start", () => { controls.autoRotate = false; clearTimeout(idleTimer); });
+    controls.addEventListener("end", () => { if (!reduceMotion) idleTimer = setTimeout(() => (controls.autoRotate = view === "overview"), 9000); });
+    let targetGoal = null;
+
+    let view = "overview";
+    const viewBtns = [...root.querySelectorAll(".bn-views button")];
+    function setView(v) {
+      view = v;
+      viewBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === v)));
+      controls.enabled = v === "overview";
+      K.head.visible = v !== "driver";
+      $("speed").hidden = v === "overview";
+      $("pins").classList.toggle("is-close", v !== "overview");
+      $("pins").hidden = v === "driver";
+      beacon.visible = v === "overview";
+      root.classList.toggle("is-riding", v !== "overview");
+      resize();
+      if (v === "overview") {
+        controls.target.copy(kart.position);
+        targetGoal = centre.clone();
+        camera.position.copy(kart.position).add(new T3.Vector3(-70, 66, 86));
+      }
+    }
+    viewBtns.forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
+
+    // ----- playback -----
+    let t = 0, playing = !reduceMotion, visible = true, last = performance.now();
+    const playBtn = $("play");
+    const syncPlay = () => { playBtn.textContent = playing ? "Pause" : "Kør"; playBtn.setAttribute("aria-label", playing ? "Pause" : "Kør"); };
+    syncPlay();
+    playBtn.addEventListener("click", () => { playing = !playing; syncPlay(); });
+    function jumpTo(nt, fromPin) {
+      t = (nt + T) % T;
+      place(true);
+      if (fromPin && view === "overview") targetGoal = kart.position.clone();
+    }
+    const trackEl = $("track");
+    let dragging = false;
+    const trackTo = (ev) => {
+      const r = trackEl.getBoundingClientRect();
+      const d = Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width)) * Ln.length_m;
+      jumpTo(idxAtDist(d) / hz);
+    };
+    trackEl.addEventListener("pointerdown", (ev) => { dragging = true; trackEl.setPointerCapture(ev.pointerId); trackTo(ev); });
+    trackEl.addEventListener("pointermove", (ev) => { if (dragging) trackTo(ev); });
+    trackEl.addEventListener("pointerup", () => { dragging = false; });
+    trackEl.addEventListener("keydown", (ev) => {
+      if (ev.key === "ArrowRight" || ev.key === "ArrowLeft") { ev.preventDefault(); jumpTo(t + (ev.key === "ArrowRight" ? 3 : -3)); }
+    });
+
+    const camGoal = new T3.Vector3(), lookGoal = new T3.Vector3(), look = new T3.Vector3();
+    let firstFollow = true;
+    function place(snap, dt = 0) {
+      const s = sampleAt(t);
+      kart.position.copy(s.p);
+      const a = P[Math.max(0, s.i - 3)], b = P[Math.min(n - 1, s.i + 4)];
+      const dir = new T3.Vector3().subVectors(b, a); dir.y = 0;
+      if (dir.lengthSq() > 1e-4) {
+        dir.normalize();
+        snap ? heading.copy(dir) : heading.lerp(dir, 0.18).normalize();
+      }
+      kart.lookAt(kart.position.clone().add(heading));
+      // steer from the line's curvature over a few metres (positive = left), lean the body a touch outwards
+      const p0 = P[Math.max(0, s.i - 5)], p1 = P[s.i], p2 = P[Math.min(n - 1, s.i + 5)];
+      const ax = p1.x - p0.x, az = p1.z - p0.z, bx = p2.x - p1.x, bz = p2.z - p1.z;
+      const len = (Math.hypot(ax, az) + Math.hypot(bx, bz)) / 2;
+      const curv = len > 0.2 ? Math.atan2(az * bx - ax * bz, ax * bx + az * bz) / len : 0;
+      const steer = K.update(dt, s.v / 3.6, Math.max(-0.5, Math.min(0.5, Math.atan(1.04 * curv) * 1.3)), snap);
+      kart.rotateZ(steer * Math.min(1, s.v / 50) * 0.07);
+      beacon.position.copy(kart.position).add(new T3.Vector3(0, 2.5, 0));
+      sun.position.copy(kart.position).add(new T3.Vector3(-18, 30, 12));
+      sun.target.position.copy(kart.position);
+
+      // story card: the latest stop the kart has passed
+      let k = 0;
+      for (const st of stops) if (s.d >= st.d) k = st.k;
+      showStop(k);
+      const f = s.d / Ln.length_m * 100;
+      $("fill").style.width = f + "%"; $("kart").style.left = f + "%";
+      trackEl.setAttribute("aria-valuenow", Math.round(f));
+      ticks.forEach((tk, j) => tk.classList.toggle("is-past", s.d >= stops[j].d));
+      $("kmh").textContent = Math.round(s.v);
+      if (snap) firstFollow = true;
+      return s;
+    }
+
+    function frame(now) {
+      const dt = Math.min(0.1, (now - last) / 1000); last = now;
+      if (!visible) { requestAnimationFrame(frame); return; }
+      if (playing) t = (t + dt) % T;
+      const s = place(false, playing ? dt : 0);
+      const ease = 1 - Math.exp(-dt * 4);
+      if (view === "overview") {
+        if (targetGoal) {
+          controls.target.lerp(targetGoal, 1 - Math.exp(-dt * 2.5));
+          if (controls.target.distanceTo(targetGoal) < 0.3) targetGoal = null;
+        }
+        controls.update();
+      } else if (view === "follow") {
+        camGoal.copy(kart.position).addScaledVector(heading, -5.6).add(new T3.Vector3(0, 2.5, 0));
+        lookGoal.copy(kart.position).addScaledVector(heading, 4).add(new T3.Vector3(0, 0.6, 0));
+        if (firstFollow) { camera.position.copy(camGoal); look.copy(lookGoal); firstFollow = false; }
+        camera.position.lerp(camGoal, ease); look.lerp(lookGoal, ease);
+        camera.lookAt(look);
+      } else {
+        const eye = kart.localToWorld(K.eye.clone());
+        lookGoal.copy(pointAhead(s.d, 11)).add(new T3.Vector3(0, 0.5, 0));
+        if (firstFollow) { look.copy(lookGoal); firstFollow = false; }
+        look.lerp(lookGoal, 1 - Math.exp(-dt * 6));
+        camera.position.copy(eye); camera.lookAt(look);
+      }
+      // project pins
+      const rw = stage.clientWidth, rh = stage.clientHeight, v3 = new T3.Vector3();
+      stops.forEach((st, j) => {
+        v3.copy(st.anchor).project(camera);
+        const dist = camera.position.distanceTo(st.anchor);
+        const show = v3.z < 1 && Math.abs(v3.x) < 1.1 && Math.abs(v3.y) < 1.1 && (view === "overview" || (dist > 6 && dist < 55));
+        pins[j].hidden = !show;
+        if (show) pins[j].style.transform = `translate(${(v3.x + 1) / 2 * rw}px, ${(1 - v3.y) / 2 * rh}px) translate(-50%, -100%)`;
+      });
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+
+    const resize = () => {
+      const w = stage.clientWidth, h = stage.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.fov = view === "driver" ? (w < 600 ? 80 : 68) : (w < 600 ? 62 : 50);
+      // on wide screens push the picture right so the track sits clear of the invitation text
+      if (w > 900) camera.setViewOffset(w, h, -w * 0.17, 0, w, h);
+      else camera.setViewOffset(w, h, 0, h * 0.14, w, h);   // lift the track above the story card
+      camera.updateProjectionMatrix();
+    };
+    new ResizeObserver(resize).observe(stage);
+    resize();
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.05 }).observe(stage);
+    place(true);
+    controls.update();
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
